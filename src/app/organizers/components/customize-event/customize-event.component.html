@@ -1,0 +1,124 @@
+<div class="container my-4">
+    <!-- Primera fila con dos columnas -->
+    <div class="row g-4 mb-3">
+        <!-- Columna de 4 columnas (izquierda) -->
+        <div class="col-md-5">
+        </div>
+        <!-- Columna de 8 columnas (derecha) -->
+        <div class="col-md-7">
+            <div class=" p-3 rounded">
+                <h2>Personalizar evento</h2> 
+            </div>
+        </div>
+    </div>
+
+    <!-- Segunda fila, alineación de los botones -->
+    <div class="row g-4">
+        <!-- Columna de 4 columnas para la foto y el botón -->
+        <div class="col-md-5 d-flex flex-column justify-content-between">
+            <div class="p-3 h-100 rounded mb-3">
+                <img 
+                  src="../../../../assets/imagen_evento.png" 
+                  alt="Imagen de evento" 
+                  class="img-fluid w-100"
+                />
+              </div>
+              
+            <div class="p-3 rounded"
+                style="display: flex;
+                justify-content: center;
+                "
+            >
+                <p-button 
+                label="Actualizar Imagen" 
+                class="custom-button" 
+                />
+            </div>
+        </div>
+
+        <!-- Columna de 8 columnas para el contenido del evento -->
+        <div class="col-md-7 d-flex flex-column justify-content-between">
+            <div>
+                <div class="p-3 rounded mb-3">
+                    <input 
+                        type="text" 
+                        class="form-control p-3" 
+                        placeholder="Escribe el nombre del evento" 
+                        [(ngModel)]="eventName"> <!-- Vincula el input a una variable -->
+                </div>
+                <!-- Subfila con tres columnas para categoría, fecha y hora -->
+                <div class="row g-4 mb-3">
+                    <div class="col-4">
+                        <div class="p-3 rounded">
+                            <select 
+                                class="form-control p-3" 
+                                [(ngModel)]="selectedEvent">
+                                <option value="" disabled selected>Categoria</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-4">
+                        <div class="p-3 rounded">
+                            <p-calendar 
+                                [(ngModel)]="selectedDate" 
+                                [iconDisplay]="'input'" 
+                                [showIcon]="true" 
+                                inputId="icondisplay" 
+                                class="custom-calendar"
+                                placeholder="Fecha"
+
+                            />
+                        </div>
+                    </div>
+                    
+                    <div class="col-4">
+                        <div class="p-3 rounded">
+                            <p-calendar 
+                            inputId="calendar-timeonly" 
+                            [(ngModel)]="time" 
+                            [timeOnly]="true" 
+                            class="custom-calendar"
+                            placeholder="Hora"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ubicación y descripción del evento -->
+                <div class="input-group p-3 rounded mb-3">  
+                        <input 
+                        type="text" 
+                        class="form-control p-3" 
+                        placeholder="Ubicación del evento"  
+                        [(ngModel)]="eventPlace">
+                        <span class="input-group-text">
+                            <i class="pi pi-map-marker"></i> <!-- Ícono de ubicación de PrimeIcons -->
+                        </span>
+                </div>
+                <div class="p-3 rounded mb-3">
+                    <textarea 
+                      rows="5" 
+                      pInputTextarea 
+                      [autoResize]="true" 
+                      class="custom-textarea"
+                      placeholder="Descripción del evento" 
+                      [(ngModel)]="eventDescription"
+                      >
+                    </textarea>
+                  </div>
+                  
+            </div>
+
+            <!-- Botón alineado al fondo de la columna -->
+            <div class="p-3 rounded"  style="display: flex;
+            justify-content: start;
+            ">
+                <p-button 
+                label="Guardar y publicar" 
+                class="custom-button" 
+                />
+            </div>
+        </div>
+    </div>
+</div>
