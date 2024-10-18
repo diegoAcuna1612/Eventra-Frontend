@@ -1,0 +1,122 @@
+h2{
+    font-family: Livvic;
+    color: var(--Schemes-On-Primary, #FFF);
+    font-weight: 250;
+    line-height: normal;
+    font-style: normal;
+}
+input {
+    background-color: transparent !important; 
+    border: 1px solid #B9B9B9;
+    border-radius: 5px;
+    color: white; /* Texto blanco */
+    font-family: "M PLUS 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+input:focus {
+    background-color: transparent !important; 
+    outline: none; 
+    box-shadow: none; 
+    border-color: white; 
+    color: white !important; 
+}
+
+select{
+    background-color: transparent !important; 
+    border: 1px solid #B9B9B9;
+    border-radius: 5px;
+    color: white; /* Texto blanco */
+    font-family: "M PLUS 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+}
+select::placeholder{
+    color: rgba(255, 255, 255, 0.7); 
+}
+select:focus{
+    background-color: transparent !important; 
+    outline: none;
+    box-shadow: none; 
+    border-color: white;
+    color: white !important;
+}
+::ng-deep .p-inputtext {
+    background-color: transparent !important;
+    border: 1px solid #B9B9B9 !important;
+    border-radius: 5px !important;
+    color: white !important; /* Texto blanco */
+    font-family: "M PLUS 2" !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 100 !important;
+    line-height: normal !important;
+    padding: 16px;
+}
+
+::ng-deep .p-inputtext::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important; 
+}
+
+::ng-deep .p-inputtext:focus {
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important; 
+    border-color: white !important; 
+    color: white !important;
+}
+
+.custom-textarea {
+    width: 100%; 
+    max-width: 100%;
+    background-color: transparent !important; 
+    border: 1px solid #B9B9B9; 
+    border-radius: 5px;
+    color: white;
+    font-family: "M PLUS 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+}
+.custom-textarea:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: white;
+}
+
+.custom-button ::ng-deep .p-button  {
+    background-color: var(--yellow) !important; 
+    border-radius: 25px !important; 
+    border: none !important;
+    color: var(--white) !important; 
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.custom-button:hover ::ng-deep .p-button {
+    background-color: rgb(206, 137, 0) !important;
+}
+
+.input-group-text{
+    background-color: transparent !important;
+    border: 1px solid #B9B9B9;
+    border-radius: 5px;
+    color: #808080;
+    font-family: "M PLUS 2";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+}
