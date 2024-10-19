@@ -1,0 +1,55 @@
+<div class="flex flex-col ml-10 w-11/12 max-md:ml-3 max-md:w-full">
+  <div
+    class="flex flex-col grow py-6 w-full font-light text-white whitespace-nowrap rounded-3xl bg-customGray shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:mt-9">
+    <h2 class="z-10 px-16 text-xl bg-customOrange max-md:px-5 text-center">Filtros</h2>
+    <div class="flex flex-col px-4 mt-2 w-full">
+      <label for="categories" class="self-start text-xl">Categorías</label>
+      <select id="categories" [(ngModel)]="filters.category"
+              class="flex shrink-0 mt-2.5 py-4 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[21px] w-full p-2"></select>
+
+      <label class="self-start mt-2 text-xl">Precio</label>
+      <div class="flex gap-2.5 text-xs">
+        <div class="flex flex-col w-1/2">
+          <span>Mínimo</span>
+          <input type="number" [(ngModel)]="filters.minPrice" placeholder="S/"
+                 class="px-1.5 py-2 border border-white border-solid bg-zinc-300 bg-opacity-0 w-full"
+                 aria-label="Precio mínimo"/>
+        </div>
+        <span class="text-sm mt-4">a</span>
+        <div class="flex flex-col w-1/2">
+          <span>Máximo</span>
+          <input type="number" [(ngModel)]="filters.maxPrice" placeholder="S/"
+                 class="px-1.5 py-2 border border-white border-solid bg-zinc-300 bg-opacity-0 w-full"
+                 aria-label="Precio máximo"/>
+        </div>
+      </div>
+
+      <label class="self-start mt-2.5 text-xl">Fecha</label>
+      <div class="flex gap-2.5 text-xs">
+        <div class="flex flex-col w-1/2">
+          <span>Inicio</span>
+          <input type="date" id="startDate" [(ngModel)]="filters.startDate"
+                 class="date-input px-1.5 py-2 text-xs border border-white border-solid bg-zinc-300 bg-opacity-0 w-full"
+                 placeholder="dd/mm/aaaa"/>
+        </div>
+        <span class="text-sm mt-4">a</span>
+        <div class="flex flex-col w-1/2">
+          <span>Final</span>
+          <input type="date" id="endDate" [(ngModel)]="filters.endDate"
+                 class="date-input px-1.5 py-2 text-xs border border-white border-solid bg-zinc-300 bg-opacity-0 w-full"
+                 placeholder="dd/mm/aaaa"/>
+        </div>
+      </div>
+
+      <button (click)="applyFilters()"
+              class="self-center px-6 py-1 mt-6 w-25 text-xl bg-customOrange2 rounded shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+        Aplicar
+      </button>
+    </div>
+
+  </div>
+
+  <div *ngIf="filterMessage" class="mt-4  text-center text-orange-500">
+    <strong>{{ filterMessage }}</strong>
+  </div>
+</div>

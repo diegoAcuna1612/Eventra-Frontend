@@ -1,0 +1,151 @@
+
+<div class="flex overflow-hidden flex-col bg-white">
+
+  <main class="self-center mt-10 mb-10 max-w-full w-[870px] max-md:mt-10">
+    <div class="flex gap-5 max-md:flex-col">
+
+      <section
+        class="flex flex-col w-[70%] max-md:ml-0 max-md:w-full"
+        aria-labelledby="event-title"
+      >
+        <app-card-detail-event></app-card-detail-event>
+
+      </section>
+
+      <aside
+        class="flex flex-col ml-5 w-[30%] max-md:ml-1 max-md:w-full"
+        aria-labelledby="ticket-section"
+      >
+        <div class="flex flex-col grow text-base font-light text-white max-md:mt-7">
+          <div
+            class="flex flex-col pt-4 pb-1.5 w-full bg-neutral-800 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
+          >
+            <h2 id="ticket-section" class="px-16 whitespace-nowrap bg-customOrange text-center max-md:px-5">
+              Datos
+            </h2>
+
+            <div class="flex flex-col px-6 mt-3 text-sm max-md:px-5">
+              <label class="self-start text-xl" for="event-date">Fecha</label>
+              <select
+                id="event-date"
+                class="px-1.5 py-1 mt-1 text-xs border border-white border-solid bg-zinc-300 bg-opacity-0"
+              >
+                <option>{{event.startEventDate}}</option>
+              </select>
+              <div class="flex justify-between text-xl">
+                <div class="mt-2 max-md:mr-0.5 ">Horario: </div>
+                <div class="mt-2 max-md:mr-0.5">{{event.hour}}</div>
+
+              </div>
+
+            </div>
+
+            <h3 class="px-16 mt-3 whitespace-nowrap bg-customOrange text-center max-md:px-5">
+              Entradas
+            </h3>
+            <form>
+              <div class="flex gap-2 px-2 justify-between self-center mt-1.5 w-full items-center">
+
+                <div class="flex flex-col mt-0.5 w-full">
+                  <label class="self-start " for="vip-tickets">VIP Golden Access</label>
+                  <label class="text-6">Precio: S/ 450.00</label>
+                </div>
+
+                <div class="flex gap-0.5 self-start mt-3.5 whitespace-nowrap bg-customOrange">
+                  <button type="button" aria-label="Decrease VIP tickets" (click)="decreaseTickets('vip')" class="w-5 h-5 flex items-center justify-center">-</button>
+                  <input
+                    type="number"
+                    id="vip-tickets"
+                    class="z-10 px-1 text-xs text-black bg-white w-8 h-5"
+                    [value]="vipTickets"
+                    min="0"
+                    readonly
+                  />
+                  <button type="button" aria-label="Increase VIP tickets" (click)="increaseTickets('vip')" class="w-5 h-5 flex items-center justify-center">+</button>
+                </div>
+              </div>
+
+              <hr class="shrink-0 mt-3 h-px border border-white border-solid" />
+
+              <div class="flex px-2 gap-10 self-center mt-1.5 w-full whitespace-nowrap">
+
+                <div class="flex flex-col mt-0.5 w-full">
+                  <label class="self-start " for="platea-tickets">Platea</label>
+                  <label class="text-6">Precio: S/ 250.00</label>
+                </div>
+
+                <div class="flex gap-0.5 self-start mt-3.5 bg-customOrange">
+                  <button type="button" aria-label="Decrease Platea tickets" (click)="decreaseTickets('platea')" class="w-5 h-5 flex items-center justify-center">-</button>
+                  <input
+                    type="number"
+                    id="platea-tickets"
+                    class="z-10 px-1 text-xs text-black bg-white w-8 h-5"
+                    [value]="plateaTickets"
+                    min="0"
+                    readonly
+                  />
+                  <button type="button" aria-label="Increase Platea tickets" (click)="increaseTickets('platea')" class="w-5 h-5 flex items-center justify-center">+</button>
+                </div>
+              </div>
+
+              <hr class="shrink-0 mt-3 h-px border border-white border-solid" />
+
+              <div class="flex px-2 gap-10 self-center mt-1.5 w-full whitespace-nowrap">
+                <div class="flex flex-col mt-0.5 w-full">
+                  <label class="self-start " for="general-tickets">General</label>
+                  <label class="text-6">Precio: S/ 125.00</label>
+                </div>
+
+                <div class="flex gap-0.5 my-auto mt-3.5 bg-customOrange">
+                  <button type="button" aria-label="Decrease General tickets" (click)="decreaseTickets('general')" class="w-5 h-5 flex items-center justify-center">-</button>
+                  <input
+                    type="number"
+                    id="general-tickets"
+                    class="z-10 px-1 text-xs text-black bg-white w-8 h-5"
+                    [value]="generalTickets"
+                    min="0"
+                    readonly
+                  />
+                  <button type="button" aria-label="Increase General tickets" (click)="increaseTickets('general')" class="w-5 h-5 flex items-center justify-center">+</button>
+                </div>
+              </div>
+
+              <hr class="shrink-0 mt-3 h-px border border-white border-solid" />
+
+              <div class="flex px-2 justify-between self-center mt-1.5 w-full whitespace-nowrap">
+
+                <label class="text-6">Total: </label>
+                <label class="text-6">S/ {{ total }}.00</label>
+
+              </div>
+
+            </form>
+          </div>
+
+          <button
+            (click)="buyTickets()"
+            class="self-center px-3 py-1 mt-3 w-25 text-xl bg-customOrange2 rounded shadow-[0px_4px_4px_rgba(0,0,0,0.25)] ">
+            Comprar
+          </button>
+
+          <div
+            class="flex relative flex-col mt-3 w-full text-base text-black rounded-3xl aspect-[1.628]"
+          >
+            <img
+              loading="lazy"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/f8a2183e3e1108c3a1b8590d00cecb1226bfaae636c59d83bb0b853147687330?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81"
+              alt="Event location map"
+              class="object-cover absolute inset-0 size-full"
+            />
+            <button
+              class="relative px-10 py-16 rounded-3xl bg-zinc-300 bg-opacity-60 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5"
+            >
+              Ver ubicación del evento
+            </button>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+</div>

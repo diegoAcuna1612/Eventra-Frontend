@@ -1,0 +1,15 @@
+<header class="flex flex-col items-center  pt-1  w-full text-white shadow-sm bg-neutral-800 max-md:px-5 max-md:max-w-full">
+  <div class="flex flex-wrap gap-5 justify-between w-full max-w-[939px] max-md:max-w-full">
+    <div class="flex items-center">
+      <img ngSrc="assets/logo.png" alt="Logo" class="object-contain shrink-0 aspect-[1] w-[100px]" height="482" width="619">
+    </div>
+    <div class="flex gap-10 my-auto max-md:max-w-full">
+
+      <h1 class="text-3xl">
+        <span *ngIf="!isRegisterPage">INICIO DE SESIÓN</span>
+        <span *ngIf="isRegisterPage">REGISTRO</span>
+      </h1>
+    </div>
+  </div>
+  <div class="w-full h-2 bg-gradient-to-r from-customOrange2 to-customG  shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"></div>
+</header>

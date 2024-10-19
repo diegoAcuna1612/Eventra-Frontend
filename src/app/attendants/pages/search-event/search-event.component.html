@@ -1,0 +1,33 @@
+<div class="flex overflow-hidden flex-col bg-white">
+  <main class="flex flex-col items-center self-center mt-10 mb-10 w-full max-w-[931px] max-md:max-w-full">
+    <div class="flex justify-between gap-5 max-md:flex-col">
+      <div class="flex flex-wrap w-full">
+        <div class="flex flex-wrap gap-5 justify-between max-w-full font-semibold w-[701px]">
+          <h1 class="text-2xl text-orange-500">Búsqueda "{{ searchQuery }}"</h1>
+          <div class="flex gap-2.5 self-start mt-2 text-xl text-customGray items-center">
+            <div class="grow">{{ paginatedEvents.length }} de {{ filteredEvents.length }}</div>
+            <div class="flex gap-0.5">
+              <button (click)="previousPage()"
+                      class="flex items-center justify-center w-5 h-5 bg-customOrange button-icon transition-transform duration-200 active:scale-125 active:bg-customOrange2">
+                <i class="pi pi-caret-left text-white text-xs"></i>
+              </button>
+              <button (click)="nextPage()"
+                      class="flex items-center justify-center w-5 h-5 bg-customOrange button-icon transition-transform duration-200 active:scale-125 active:bg-customOrange2">
+                <i class="pi pi-caret-right text-white text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-5 w-full">
+          <app-card-event *ngFor="let event of paginatedEvents" [imageSrc]="event.imageSrc"
+                          [title]="event.title" [eventDate]="event.startEventDate" [tags]="event.tags"
+                          [price]="event.price"></app-card-event>
+        </div>
+      </div>
+
+      <div class="w-full  sticky top-0">
+        <app-filter-event (filtersChanged)="applyFilters($event)"></app-filter-event>
+      </div>
+    </div>
+  </main>
+</div>

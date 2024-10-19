@@ -1,0 +1,98 @@
+<div
+  class="flex relative flex-col pt-80 w-full rounded-xl min-h-[510px] max-md:pt-24 max-md:mt-7 max-md:max-w-full"
+>
+  <img [src]="event.imageSrc" [alt]="event.title" class="object-cover absolute inset-0 size-full rounded-[10px]" />
+
+  <div
+    class="relative pt-6 w-full rounded-sm shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:pr-5 max-md:max-w-full"
+  >
+    <div
+      class="absolute inset-0 bg-customGray shadow-[0_4px_4px_rgba(0,0,0,0.25)] rounded-[3px]" style="clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 100%);"
+    >
+    </div>
+
+    <div class="flex gap-2 mb-2 max-md:flex-col">
+      <div class="flex flex-col w-[43%] max-md:ml-0 max-md:w-full">
+        <div class="flex relative grow max-md:mt-6">
+          <div class="flex flex-col my-auto w-full">
+            <h1
+              id="event-title"
+              class="mr-4 ml-3.5 text-xl text-white max-md:mx-2.5"
+            >
+              {{event.title}}
+            </h1>
+
+            <div
+              class="relative flex justify-between px-3 py-1 mt-1 text-6  text-white bg-customOrange"
+              role="group"
+              aria-label="Event categories"
+            >
+              <span *ngFor="let tag of event.tags">{{ tag }}</span>
+            </div>
+
+            <div class="flex gap-6 self-center mt-3.5">
+              <div class="flex flex-col">
+
+                <div class="flex gap-1 items-center text-6 mt-1 text-white max-md:mr-2.5">
+                  <i class="pi pi-calendar text-xs "></i>
+                  <time datetime="2024-11-02 ">{{ event.startEventDate }}</time>
+                </div>
+                <div class="flex gap-1 items-center text-6 mt-1 text-white max-md:mr-2.5">
+                  <i class="pi pi-calendar text-xs "></i>
+                  <time datetime="2024-11-03">{{ event.endEventDate }}</time>
+                </div>
+
+              </div>
+
+              <div
+                class="flex flex-col my-auto text-xs text-white whitespace-nowrap"
+              >
+                <div class="self-start px-1.5 py-0.5 bg-customOrange max-md:ml-2">
+                  {{ event.hour }}
+                </div>
+
+              </div>
+            </div>
+
+            <div class="flex gap-5 mt-3.5 items-center">
+              <!--cambiar por imagenes de auspiciadores-->
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/f44146dbf8a1fd68403919d781137db79e84eaf642aa8a8a36b6118672454432?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81"
+                alt="Event location"
+                class="object-contain shrink-0 aspect-[3.46] w-[83px]"
+              />
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/cf0b8870a122b359e574b3ad85dc9f2d4e2c226d4073337a0a57c35b48f3000d?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81"
+                alt="Share event"
+                class="object-contain shrink-0 my-auto w-5 aspect-square"
+              />
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/69c59e7c81de2d02e163875d8988795e288afaa5c6328e4a1a75807dbe140c6f?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81"
+                alt="Event rating"
+                class="object-contain  aspect-[4.63] w-[74px]"
+              />
+            </div>
+          </div>
+          <div
+            class="shrink-0 w-px border border-white border-solid h-[162px]"
+          ></div>
+        </div>
+      </div>
+      <div class="flex flex-col ml-3 w-[57%] max-md:ml-0 max-md:w-full">
+        <div
+          class="flex relative flex-col self-stretch my-auto text-white max-md:mt-10"
+        >
+          <h2 class="self-start text-ms">Información del evento:</h2>
+          <p class="mt-3 text-6">
+            {{
+              event.description
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

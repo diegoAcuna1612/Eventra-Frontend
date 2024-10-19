@@ -1,0 +1,24 @@
+<div class="flex overflow-hidden flex-col bg-white">
+  <main class="self-center pt-5 pr-6 pb-2 mt-10 mb-10 max-w-full bg-customGray rounded-[20px] w-[889px] max-md:pr-5 max-md:mt-10">
+    <div class="flex mb-2 max-md:flex-col">
+      <app-sidebar [user]="user" class="w-[22%] max-md:w-full"></app-sidebar>
+      <div class="shrink-0 w-px border border-white border-solid self-stretch"></div>
+      <section class="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
+        <div class="flex flex-col max-md:mt-10 max-md:max-w-full">
+          <h2 class="self-start text-xl font-light text-white">Activos</h2>
+          <hr class="shrink-0 h-px border border-white border-solid max-md:max-w-full" />
+          <div class="flex flex-col w-full  ">
+            <app-card-ticket *ngFor="let ticket of tickets" [ticket]="ticket" ></app-card-ticket>
+          </div>
+
+          <h2 class="self-start mt-5 text-xl font-light text-white">Pasados</h2>
+          <hr class="shrink-0 h-px border border-white border-solid max-md:max-w-full" />
+          <div class="flex flex-col w-full  ">
+            <app-card-ticket *ngFor="let ticket of tickets" [ticket]="ticket" ></app-card-ticket>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<!-- falta separar pasados de activos -->

@@ -1,0 +1,29 @@
+:host {
+  display: contents;
+}
+
+builder-component {
+  max-width: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.date-input {
+  color: white;
+  background-color: transparent;
+  position: relative;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

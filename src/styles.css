@@ -4,6 +4,10 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Definir las variables de colores en el selector :root */
 :root {
     --dark-blue: #2C375F;
@@ -26,10 +30,12 @@
     --gray-4: #BDBDBD;
     --gray-5: #E0E0E0;
 }
+
 body {
-    background-color:#252525;/* Cambia el color por el que desees */
-    margin: 0;
-    padding: 0;
+  @apply font-sans;
+  background-color:#252525;/* Cambia el color por el que desees */
+  margin: 0;
+  padding: 0;
 }
   
   
@@ -64,4 +70,5 @@ line-height: 26.4px;
 h6 {
 font-size: 20px;
 line-height: 22px;
+
 }

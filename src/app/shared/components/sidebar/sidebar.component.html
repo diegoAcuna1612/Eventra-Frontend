@@ -1,0 +1,30 @@
+<aside class="flex flex-col w-full max-md:ml-0 max-md:w-full">
+  <nav class="flex flex-col grow mt-1 text-xl font-light text-white max-md:mt-10">
+    <img loading="lazy"
+         [src]="user.image"
+         class="object-contain self-center max-w-full rounded-full aspect-square w-[134px]"
+         alt="User profile picture"/>
+    <div class="self-center text-sm">{{ user.username }}</div>
+    <div class="self-center text-sm">ID: {{ user.id }}</div>
+
+    <hr class="shrink-0 mt-2 h-px border border-white border-solid"/>
+
+    <button class=" px-5 py-3.5 text-white bg-customGray hover:bg-white hover:text-black text-left" routerLink="/update-profile">Mi Perfil</button>
+
+    <hr class="shrink-0 h-px border border-white border-solid"/>
+
+    <button class="px-5 py-3.5 text-white bg-customGray hover:bg-white hover:text-black text-left" routerLink="/my-tickets">Mis Entradas</button>
+
+    <hr class="shrink-0  h-px border border-white border-solid"/>
+
+    <button class="px-5 py-3.5 text-white bg-customGray hover:bg-white hover:text-black text-left">Mis Eventos</button>
+
+    <hr class="shrink-0 h-px border border-white border-solid"/>
+
+    <button class="px-5 py-3.5 text-white bg-customGray hover:bg-white hover:text-black text-left">Pagos</button>
+
+    <hr class="shrink-0  h-px border border-white border-solid"/>
+
+    <button class="px-5 py-3.5 text-white bg-customGray hover:bg-white hover:text-black text-left " (click)="logout()" >Cerrar Sesión</button>
+  </nav>
+</aside>

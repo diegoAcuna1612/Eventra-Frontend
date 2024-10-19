@@ -1,0 +1,56 @@
+<div class="flex overflow-hidden flex-col bg-white">
+  <main class="z-10 mt-0 w-full max-md:max-w-full">
+    <div class="flex max-md:flex-col">
+      <section class="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
+        <div class="flex flex-col self-stretch my-auto w-full font-light max-md:mt-10 max-md:max-w-full">
+          <div class="flex flex-col items-start self-end  max-w-full w-[450px] max-md:mr-2.5">
+            <p class="self-stretch text-xs text-orange-500">
+              Queremos confirmar que eres tú. Te hemos enviado un correo a <a href="mailto:daniel_zeba540@gmail.com" class="underline">daniel_zeba540&#64;gmail.com</a>.
+            </p>
+            <p class="self-stretch text-xs text-orange-500">
+              Por favor, revisa tu bandeja de entrada y escribe el código.
+            </p>
+
+            <form
+              class="flex flex-col items-start self-end  max-w-full text-sm text-orange-500 whitespace-nowrap w-[450px] max-md:mr-2.5">
+
+              <label for="codeInput" class="mt-4 mb-4 text-sm text-customBluelight">Código</label>
+
+              <div class="relative px-bd py-0.5 w-[300px]"
+                   style="background: linear-gradient(to right, #fa8d3b 19%, #41b8ff 82%);">
+                <input type="text" id="codeInput"
+                       class="block w-full h-full p-2 bg-white text-customGray text-2xl border-none focus:outline-none" placeholder="000 - 000" style="margin: 0;"/>
+              </div>
+
+              <div class="relative px-bd py-0.5 mt-10"
+                   style="background: linear-gradient(to bottom, #fa8d3b 13%, #41b8ff 93%);">
+
+                <button routerLink="/confirm-password"
+                        type="submit"
+                        class=" px-10 max-md:px-5 max-md:mt-10 block w-full h-full p-2 bg-white border-none focus:outline-none"
+                        style="margin: 0;">
+                  Enviar
+                </button>
+              </div>
+
+            </form>
+            <p class="mt-8 text-xs text-black">
+              ¿No recibiste el corrreo?, <button class="underline hover:text-customOrange2">Volver a enviar</button> en 25seg
+            </p>
+          </div>
+
+
+          <div class="shrink-0 mt-28 h-px border border-solid border-zinc-600 max-md:mt-10 max-md:max-w-full"></div>
+
+          <div class="flex gap-5 justify-between self-center mt-3 ml-12 max-w-full text-xs text-black w-[267px]">
+            <a routerLink="/login" class="focus:outline-none underline focus:underline hover:text-customOrange2">¿Tienes una cuenta? Inicia sesión</a>
+          </div>
+
+        </div>
+      </section>
+      <section class="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
+        <img loading="lazy" ngSrc="assets/register.png" alt="Decorative image" class="object-cover w-full h-full aspect-[1.01] max-md:max-w-full" width="500" height="500" />
+      </section>
+    </div>
+  </main>
+</div>

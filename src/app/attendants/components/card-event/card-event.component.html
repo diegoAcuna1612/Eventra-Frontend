@@ -1,0 +1,45 @@
+<div class="flex flex-col w-3/12 max-md:ml-0 max-md:w-full" (click)="navigateToEventDetails()">
+  <div class="flex relative flex-col grow pt-40 text-white rounded-xl aspect-[0.765] w-[195px] max-md:pt-24 max-md:mt-8 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+    <img
+      loading="lazy"
+      [src]="imageSrc"
+      [alt]="title"
+      class="object-cover absolute inset-0 size-full rounded-[10px]"
+    />
+
+    <div class="absolute inset-y-0 right-0 h-full" style="position: relative;">
+      <div
+        class="absolute inset-0 shadow-[0_4px_4px_rgba(0,0,0,0.25)]" style="clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 100%);"
+        [ngClass]="theme === 'blue' ? 'bg-white' : 'bg-customGray'">
+      </div>
+
+      <div class="flex relative flex-col pt-6 pb-2 w-full aspect-[1.912]">
+
+        <h3 class="relative text-sm px-1 max-md:px-2" [ngClass]="{ 'text-customGray': theme === 'blue' }">
+          {{ title }}
+        </h3>
+
+        <div class="flex items-center px-2 mt-1 max-md:px-3" [ngClass]="{ 'text-customGray': theme === 'blue' }">
+          <i class="pi pi-calendar text-xxs mr-1"></i>
+          <span class="text-xxs" >{{ eventDate }}</span>
+        </div>
+
+        <div class="relative flex justify-between px-1.5 py-0.5 mt-3.5 text-xxs max-md:px-2" [ngClass]="theme === 'blue' ? 'bg-customBluelight2' : 'bg-customOrange'">
+          <span *ngFor="let tag of tags">{{ tag }}</span>
+        </div>
+
+        <div class="flex relative gap-4 justify-between mt-2 max-md:mr-2 px-1 max-md:px-2">
+          <div class="text-sm">
+            <span class="text-xs" [ngClass]="{ 'text-neutral-800': theme === 'blue' }">Precio: </span>
+            <span [ngClass]="theme === 'blue' ? 'text-customBluelight' : 'text-customOrange2'">S/{{ price.toFixed(2) }}</span>
+          </div>
+          <button class="flex items-center justify-center px-2.5 py-0.5 my-auto text-6 whitespace-nowrap rounded shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
+                  [ngClass]="theme === 'blue' ? 'bg-customBluelight' : 'bg-customOrange2'"
+                  (click)="navigateToEventInfo()">
+            Comprar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
