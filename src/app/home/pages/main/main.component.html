@@ -1,0 +1,148 @@
+<div class="flex overflow-hidden flex-col bg-white ">
+
+  <img
+    loading="lazy"
+    src="https://cdn.builder.io/api/v1/image/assets/TEMP/55f41b01d761a3438313a7e6c23e2f278c53f11da291a46380b619c4d68784ff?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81"
+    alt="Event listing banner"
+    class="object-contain w-full aspect-[4.59] max-md:max-w-full"
+  />
+
+  <section
+    class="flex flex-col items-center px-20 pt-4 pb-8 w-full bg-white shadow-sm max-md:px-5 max-md:max-w-full"
+  >
+    <div class="flex flex-col w-full max-w-[932px] max-md:max-w-full">
+      <div
+        class="flex flex-wrap gap-5 justify-between self-stretch w-full font-semibold max-md:max-w-full items-center">
+        <h2 class="flex gap-1.5 text-2xl text-orange-500 whitespace-nowrap items-center">
+          <i class="pi pi-heart-fill text-orange-500 text-xl"></i>
+          <span class="basis-auto">Destacados</span>
+        </h2>
+        <div class="flex gap-3 mt-2.5 text-xl text-neutral-800 items-center">
+          <span class="grow">{{ currentPageDestacados + 1 }} de {{ totalPagesDestacados }}</span>
+          <div class="flex gap-0.5">
+            <button (click)="previousPageDestacados()"
+                    class="flex items-center justify-center w-5 h-5 bg-customOrange button-icon transition-transform duration-200 active:scale-125 active:bg-customOrange2">
+              <i class="pi pi-caret-left text-white text-xs"></i>
+            </button>
+            <button (click)="nextPageDestacados()"
+                    class="flex items-center justify-center w-5 h-5 bg-customOrange button-icon transition-transform duration-200 active:scale-125 active:bg-customOrange2">
+              <i class="pi pi-caret-right text-white text-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="self-center mt-4 w-full max-w-[876px] max-md:max-w-full"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center">
+          <app-card-event *ngFor="let event of paginatedEventsDestacados" [imageSrc]="event.imageSrc"
+                          [title]="event.title" [eventDate]="event.startEventDate" [tags]="event.tags"
+                          [price]="event.price"></app-card-event>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section
+    class="flex flex-col items-center px-20 pt-4 pb-8 w-full shadow-sm bg-neutral-800 max-md:px-5 max-md:max-w-full"
+  >
+    <div class="flex flex-col w-full max-w-[932px] max-md:max-w-full">
+      <div
+        class="flex flex-wrap gap-5 justify-between self-stretch w-full font-semibold max-md:max-w-full items-center"
+      >
+        <h2 class="flex gap-1.5 text-2xl text-customBluelight whitespace-nowrap items-center">
+          <i class="pi pi-star-fill text-xl"></i>
+          <span class="basis-auto">Tendencias</span>
+        </h2>
+        <div class="flex gap-3 mt-2.5 text-xl items-center">
+          <span class="grow text-white">{{ currentPageTendencias + 1 }} de {{ totalPagesTendencias }}</span>
+          <div class="flex gap-0.5">
+            <button (click)="previousPageTendencias()"
+                    class="flex items-center justify-center w-5 h-5 bg-customBluelight2 button-icon transition-transform duration-200 active:scale-125 active:bg-customBluelight">
+              <i class="pi pi-caret-left text-white text-xs"></i>
+            </button>
+            <button (click)="nextPageTendencias()"
+                    class="flex items-center justify-center w-5 h-5 bg-customBluelight2 button-icon transition-transform duration-200 active:scale-125 active:bg-customBluelight">
+              <i class="pi pi-caret-right text-white text-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="self-center mt-4 w-full max-w-[876px] max-md:max-w-full"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center">
+          <app-card-event
+            *ngFor="let event of paginatedEventsTendencias"
+            [imageSrc]="event.imageSrc"
+            [title]="event.title"
+            [eventDate]="event.startEventDate"
+            [tags]="event.tags"
+            [price]="event.price"
+            [theme]="'blue'"
+          ></app-card-event>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="flex flex-col justify-center items-center px-20 py-4 w-full bg-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:max-w-full">
+    <div class="flex flex-col items-center w-full max-w-[938px] max-md:max-w-full">
+      <div
+        class="flex flex-wrap gap-5 justify-between self-stretch w-full font-semibold max-md:max-w-full items-center">
+        <h2 class="flex gap-1.5 text-2xl text-orange-500 whitespace-nowrap items-center">
+          <i class="pi pi-circle-on text-orange-500 text-xl"></i>
+          <span class="basis-auto">Descubre</span>
+        </h2>
+        <div class="flex gap-3 mt-2.5 text-xl text-neutral-800 items-center">
+          <span class="grow">{{ currentPageDescubre + 1 }} de {{ totalPagesDescubre }}</span>
+          <div class="flex gap-0.5">
+            <button (click)="previousPageDescubre()"
+                    class="flex items-center justify-center w-5 h-5 bg-customOrange button-icon transition-transform duration-200 active:scale-125 active:bg-customOrange2">
+              <i class="pi pi-caret-left text-white text-xs"></i>
+            </button>
+            <button (click)="nextPageDescubre()"
+                    class="flex items-center justify-center w-5 h-5 bg-customOrange button-icon transition-transform duration-200 active:scale-125 active:bg-customOrange2">
+              <i class="pi pi-caret-right text-white text-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 w-full max-w-[876px] max-md:max-w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center">
+          <app-card-event *ngFor="let event of paginatedEventsDescubre" [imageSrc]="event.imageSrc"
+                          [title]="event.title" [eventDate]="event.startEventDate" [tags]="event.tags"
+                          [price]="event.price"></app-card-event>
+        </div>
+      </div>
+      <a href="#more-events" class="mt-4 ml-8 text-xl font-semibold text-black">
+        Ver más eventos... <span class="text-orange-600">&gt;</span>
+      </a>
+    </div>
+  </section>
+
+  <section
+    class="flex relative flex-col justify-center items-center px-20 py-20 w-full font-semibold text-white min-h-[279px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:max-w-full"
+  >
+    <img
+      loading="lazy"
+      ngSrc="assets/concierto.jpg"
+      alt="Background for create event banner"
+      class="object-cover absolute inset-0 size-full"
+      height="630" width="1200"/>
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="flex relative flex-col ml-9 max-w-full w-[616px]">
+      <h2 class="text-4xl max-md:max-w-full">
+        ¿QUIERES CREAR TU EVENTO?
+      </h2>
+
+      <button class="self-center flex items-center justify-center px-3.5 py-3  pt-1.5 mt-10 max-w-full text-2xl whitespace-nowrap bg-customOrange2 rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[173px] h-[50px]">
+        Contáctanos
+      </button>
+    </div>
+  </section>
+
+</div>
