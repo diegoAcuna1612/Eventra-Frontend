@@ -1,2 +1,24 @@
-<app-navbar></app-navbar>
+<div *ngIf="!isAuthenticated; else loggedInHeader">
+  <app-navbar-auth></app-navbar-auth>
+</div>
+
+<ng-template #loggedInHeader>
+  <app-navbar></app-navbar>
+</ng-template>
+
 <router-outlet></router-outlet>
+<app-footer></app-footer>
+
+<div *ngIf="notificationMessage"
+     class="fixed font-light top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-customGray text-white rounded w-80 text-center">
+  <h2 id="ticket-section" class="px-3 mt-4 whitespace-nowrap bg-customOrange text-start max-md:px-5">
+    Notificación
+  </h2>
+  <div class="p-4 mt-4 mb-4 text-2xl  bg-customBluelight2 text-center break-words max-md:px-10">
+    {{ notificationMessage }}
+  </div>
+
+</div>
+
+<button (click)="login()">Login</button>
+<button (click)="logout()">Logout</button>
