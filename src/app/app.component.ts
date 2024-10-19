@@ -7,10 +7,24 @@ import {NavbarAuthComponent} from './shared/components/navbar-auth/navbar-auth.c
 import {NgIf} from '@angular/common';
 import {NotificationService} from './shared/services/notification.service';
 
+import { HeaderComponent } from './shared/components/header/header.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabelModule } from 'primeng/floatlabel';
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, MainComponent, FooterComponent, NavbarAuthComponent, NgIf],
+  imports: [
+    RouterOutlet, 
+    NavbarComponent, 
+    MainComponent, 
+    FooterComponent, 
+    NavbarAuthComponent, 
+    HeaderComponent,
+    InputTextModule,
+    FloatLabelModule,
+    NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

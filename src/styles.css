@@ -1,9 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Definir las variables de colores en el selector :root */
+:root {
+    --dark-blue: #2C375F;
+    --yellow: #EBA721;
+    --light-blue: #0b8fda;
+    --white: #FFFFFF;
+    --light-cream: #f9f4e1;
+    --info: #2F80ED;
+    --success: #27AE60;
+    --warning: #FFD93D;
+    --error: #E83A14;
+  
+    --black-1: #000000;
+    --black-2: #1D1D1D;
+    --black-3: #282828;
+  
+    --gray-1: #333333;
+    --gray-2: #4F4F4F;
+    --gray-3: #828282;
+    --gray-4: #BDBDBD;
+    --gray-5: #E0E0E0;
+}
+
 body {
   @apply font-sans;
+  background-color:#252525;/* Cambia el color por el que desees */
+  margin: 0;
+  padding: 0;
+}
+  
+  
+/* Tipografía para los títulos (Headings) */
+h1 {
+font-size: 56px;
+line-height: 61.6px;
+
+}
+
+h2 {
+font-size: 48px;
+line-height: 52.8px;
+
+}
+
+h3 {
+font-size: 40px;
+line-height: 44px;
+}
+
+h4 {
+font-size: 32px;
+line-height: 35.2px;
+}
+
+h5 {
+font-size: 24px;
+line-height: 26.4px;
+}
+
+h6 {
+font-size: 20px;
+line-height: 22px;
 
 }
