@@ -5,7 +5,6 @@ import {User} from '../../../auth/model/user';
 import {CardTicketComponent} from '../../components/card-ticket/card-ticket.component';
 import {NgForOf} from '@angular/common';
 import {Ticket} from '../../model/ticket';
-import {Router} from '@angular/router';
 import {TicketService} from '../../services/ticket.service';
 
 @Component({

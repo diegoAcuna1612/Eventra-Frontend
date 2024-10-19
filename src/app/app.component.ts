@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {NavbarComponent} from './shared/components/navbar/navbar.component';
-import {MainComponent} from './home/pages/main/main.component';
+import {MainComponent} from './attendants/pages/main/main.component';
 import {FooterComponent} from './shared/components/footer/footer.component';
 import {NavbarAuthComponent} from './shared/components/navbar-auth/navbar-auth.component';
 import {NgIf} from '@angular/common';
