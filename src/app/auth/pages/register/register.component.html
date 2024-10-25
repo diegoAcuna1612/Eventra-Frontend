@@ -3,44 +3,52 @@
     <div class="flex max-md:flex-col">
       <section class="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
         <div class="flex flex-col self-stretch my-auto w-full font-light max-md:mt-10 max-md:max-w-full">
-          <form class="flex flex-col items-start self-end max-w-full text-sm text-orange-500 whitespace-nowrap w-[450px] max-md:mr-2.5">
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="flex flex-col items-start self-end max-w-full text-sm text-orange-500 whitespace-nowrap w-[450px] max-md:mr-2.5">
 
+            <!-- Campo de Usuario -->
             <label for="username" class="mb-1">Usuario</label>
             <div class="relative px-bd py-0.5 w-[300px]" style="background: linear-gradient(to right, #fa8d3b 19%, #41b8ff 82%);">
-              <input type="text" id="username" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none" style="margin: 0;" />
+              <input formControlName="username" type="text" id="username" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none" />
             </div>
 
+            <!-- Campo de Email -->
             <label for="email" class="mt-4 mb-1">Email</label>
             <div class="relative px-bd py-0.5 w-[300px]" style="background: linear-gradient(to right, #fa8d3b 19%, #41b8ff 82%);">
-              <input type="email" id="email" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none" style="margin: 0;" />
+              <input formControlName="email" type="email" id="email" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none" />
             </div>
 
+            <!-- Campo de Contraseña -->
             <label for="password" class="mt-4 mb-1">Contraseña</label>
             <div class="relative px-bd py-0.5 w-[300px]" style="background: linear-gradient(to right, #fa8d3b 19%, #41b8ff 82%);">
-              <input type="password" id="password" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none" style="margin: 0;" />
+              <input formControlName="password" type="password" id="password" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none" />
             </div>
 
+            <!-- Campo de Confirmar Contraseña -->
             <label for="confirm-password" class="mt-4 mb-1">Confirmar Contraseña</label>
             <div class="relative px-bd py-0.5 w-[300px]" style="background: linear-gradient(to right, #fa8d3b 19%, #41b8ff 82%);">
-              <input type="password" id="confirm-password" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none" style="margin: 0;" />
+              <input formControlName="confirmPassword" type="password" id="confirm-password" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none" />
             </div>
 
+            <!-- Botón de registro -->
             <div class="relative px-bd py-0.5 mt-10" style="background: linear-gradient(to bottom, #fa8d3b 13%, #41b8ff 93%);">
-              <button routerLink="/verify-email"
-                type="submit" class="px-10 max-md:px-5 max-md:mt-10 block w-full h-full p-2 bg-white border-none focus:outline-none" style="margin: 0;">
+              <button type="submit" class="px-10 max-md:px-5 max-md:mt-10 block w-full h-full p-2 bg-white border-none focus:outline-none">
                 Registrarse
               </button>
             </div>
-
           </form>
+
+          <!-- Separador -->
           <div class="shrink-0 mt-28 h-px border border-solid border-zinc-600 max-md:mt-10 max-md:max-w-full"></div>
 
+          <!-- Enlace para iniciar sesión -->
           <div class="flex gap-5 justify-between self-center mt-3 ml-12 max-w-full text-xs text-black w-[267px]">
             <a routerLink="/login" class="focus:outline-none underline focus:underline hover:text-customOrange2">¿Tienes una cuenta? Inicia sesión</a>
-           </div>
+          </div>
 
         </div>
       </section>
+
+      <!-- Imagen decorativa -->
       <section class="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
         <img loading="lazy" ngSrc="assets/register.png" alt="Decorative image" class="object-cover w-full h-full aspect-[1.01] max-md:max-w-full" width="500" height="500" />
       </section>

@@ -6,15 +6,22 @@ import { environment } from '../../../environments/environment.prod';
 @Injectable({
   providedIn: 'root'
 })
-export class CountryService {
-  private apiUrl = 'https://api.first.org/data/v1/countries';
+export class UsersService {
   private endpoint='users'
   private domain: string|undefined;
   constructor(private http: HttpClient) { 
       this.domain = environment.domain;
   }
+  
+  getUsers(): Observable<any> {
+    return this.http.get(`${this.domain}${this.endpoint}`);
+  }
 
-  getCountries(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  createUser(user: any): Observable<any> {
+    return this.http.post(`${this.domain}${this.endpoint}/register`, user);
+  }
+
+  loginUser(user: any): Observable<any> {
+    return this.http.post(`${this.domain}${this.endpoint}/login`, user);
   }
 }
