@@ -1,0 +1,98 @@
+<main class="flex flex-col items-center bg-customGray">
+  <section class="mt-10 mb-10  w-full max-w-[1100px] max-md:max-w-full">
+    <div class="flex gap-10 justify-center max-md:flex-col">
+      <aside class="flex flex-col w-[42%] max-md:ml-0 max-md:w-full justify-center">
+        <figure class="flex flex-col text-base font-light leading-tight text-center text-white max-md:mt-10 max-md:max-w-full">
+          <img loading="lazy" [src]="eventForm.get('imageSrc')?.value" alt="Event preview image" class="object-cover w-full rounded-2xl aspect-[4/3] cursor-pointer" (click)="fileInput.click()" />
+          <input type="file" #fileInput (change)="onFileChange($event)" class="hidden" />
+          <button class="flex flex-col self-center mt-8 max-w-full bg-amber-500 rounded-xl px-4 pt-2.5 pb-4 transition-transform duration-100 active:scale-105 active:bg-customOrange2" (click)="fileInput.click()">
+            Actualizar imagen
+          </button>
+        </figure>
+      </aside>
+
+      <article class="flex flex-col ml-5 w-[58%] max-md:ml-0 max-md:w-full">
+        <h1 class="self-start mb-10 text-4xl text-white font-[250]">Crear evento</h1>
+
+        <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="flex flex-col mt-3 w-full max-md:mt-10 max-md:max-w-full">
+
+          <div class="flex flex-col text-base rounded-md border border-solid border-zinc-400 text-zinc-500 max-md:max-w-full">
+            <label for="eventName" class="sr-only">Nombre del Evento</label>
+            <input
+              id="eventName"
+              formControlName="eventName"
+              type="text"
+              placeholder="Nombre del Evento"
+              class="z-10 py-3.5 pr-20 pl-5 bg-customGray rounded-md focus:outline-none text-white max-md:pr-5 max-md:max-w-full"
+            />
+          </div>
+
+          <div class="flex flex-wrap gap-6 mt-6">
+            <div class="flex flex-col flex-1 relative">
+              <label for="category" class="sr-only">Categoría</label>
+              <select
+                id="category"
+                formControlName="category"
+                class="appearance-none px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 focus:outline-none text-white w-full"
+              >
+                <option value="">Categoría</option>
+              </select>
+              <span class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                <i class="pi pi-chevron-down text-white"></i>
+              </span>
+            </div>
+
+            <div class="flex flex-col flex-1">
+              <label for="date" class="sr-only te">Fecha</label>
+              <input
+                id="date"
+                formControlName="date"
+                type="date"
+                class="date-input  px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
+              />
+            </div>
+
+            <div class="flex flex-col flex-1 relative">
+              <label for="time" class="sr-only">Hora</label>
+              <input
+                id="time"
+                formControlName="time"
+                type="time"
+                class="appearance-none px-3 py-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
+              />
+              <span class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                <i class="pi pi-clock text-white"></i>
+              </span>
+            </div>
+
+          </div>
+
+          <div class="mt-6">
+            <label for="location" class="sr-only">Ubicación</label>
+            <input
+              id="location"
+              formControlName="location"
+              type="text"
+              placeholder="Ubicación"
+              class="w-full px-4 py-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-zinc-500 focus:outline-none text-white"
+            />
+          </div>
+
+          <div class="mt-6">
+            <label for="description" class="sr-only">Descripción</label>
+            <textarea
+              id="description"
+              formControlName="description"
+              placeholder="Descripción"
+              class="w-full pt-3 pr-20 pb-32 pl-5 bg-customGray rounded-md border border-solid border-zinc-400 text-zinc-500 focus:outline-none text-white max-md:pr-5 max-md:pb-24"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="mt-6 px-4 pt-2.5 pb-4 w-[200px] text-base font-light leading-tight text-center text-white bg-amber-500 rounded-xl transition-transform duration-100 active:scale-105 active:bg-customOrange2">
+            Guardar y publicar
+          </button>
+        </form>
+      </article>
+    </div>
+  </section>
+</main>
