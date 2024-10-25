@@ -1,0 +1,21 @@
+.date-input {
+  color: white;
+  background-color: transparent;
+  position: relative;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+input[type="time"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type="time"]::-webkit-clear-button,
+input[type="time"]::-webkit-inner-spin-button,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
