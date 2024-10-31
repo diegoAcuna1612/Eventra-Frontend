@@ -30,19 +30,22 @@
           <div class="flex flex-wrap gap-6 mt-6">
             <div class="flex flex-col flex-1 relative">
               <label for="category" class="sr-only">Categoría</label>
-              <select
+              <input
                 id="category"
-                formControlName="category"
+                formControlName="categoryInput"
+                (keydown.enter)="addCategory($event)"
+                placeholder="Categoría"
                 class="appearance-none px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 focus:outline-none text-white w-full"
-              >
-                <option value="">Categoría</option>
-              </select>
-              <span class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                <i class="pi pi-chevron-down text-white"></i>
-              </span>
+              />
+              <div class="mt-2 flex flex-wrap gap-2">
+                <span *ngFor="let category of eventForm.get('category')?.value" class="bg-customG text-white px-2 py-1 rounded">
+                  {{ category }}
+                  <button type="button" (click)="removeCategory(category)" class="ml-2 text-red-600">x</button>
+                </span>
+              </div>
             </div>
 
-            <div class="flex flex-col flex-1">
+           <!-- <div class="flex flex-col flex-1">
               <label for="date" class="sr-only te">Fecha</label>
               <input
                 id="date"
@@ -50,9 +53,31 @@
                 type="date"
                 class="date-input  px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
               />
+            </div>-->
+
+            <div class="flex flex-col flex-1">
+              <label for="dates" class="sr-only">Fechas</label>
+              <div formArrayName="dates">
+                <div *ngFor="let date of dates.controls; let i = index" [formGroupName]="i" class="flex items-center mb-2">
+                  <input
+                    id="date-{{i}}"
+                    formControlName="date"
+                    type="date"
+                    class="date-input px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
+                  />
+                  <input
+                    id="time-{{i}}"
+                    formControlName="time"
+                    type="time"
+                    class="time-input ml-2 px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
+                  />
+                  <button type="button" (click)="removeDate(i)" class="ml-2 text-red-500">Eliminar</button>
+                </div>
+                <button type="button" (click)="addDate()" class="mt-2 px-4 pt-2.5 pb-4 bg-customBluelight2 rounded-xl text-white">Añadir Fecha</button>
+              </div>
             </div>
 
-            <div class="flex flex-col flex-1 relative">
+            <!--<div class="flex flex-col flex-1 relative">
               <label for="time" class="sr-only">Hora</label>
               <input
                 id="time"
@@ -63,8 +88,7 @@
               <span class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
                 <i class="pi pi-clock text-white"></i>
               </span>
-            </div>
-
+            </div>-->
           </div>
 
           <div class="mt-6">
@@ -74,7 +98,7 @@
               formControlName="location"
               type="text"
               placeholder="Ubicación"
-              class="w-full px-4 py-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-zinc-500 focus:outline-none text-white"
+              class="w-full px-4 py-3.5 bg-customGray rounded-md border border-solid border-zinc-400 focus:outline-none text-white"
             />
           </div>
 
@@ -84,8 +108,60 @@
               id="description"
               formControlName="description"
               placeholder="Descripción"
-              class="w-full pt-3 pr-20 pb-32 pl-5 bg-customGray rounded-md border border-solid border-zinc-400 text-zinc-500 focus:outline-none text-white max-md:pr-5 max-md:pb-24"
+              class="w-full pt-3 pr-20 pb-32 pl-5 bg-customGray rounded-md border border-solid border-zinc-400 focus:outline-none text-white max-md:pr-5 max-md:pb-24"
             ></textarea>
+          </div>
+
+          <div class="mt-6">
+            <h1 class="text-xl text-white mb-4 font-[250]">Tickets</h1>
+            <label for="tickets" class="sr-only">Tickets</label>
+            <div formArrayName="tickets">
+              <div *ngFor="let ticket of tickets.controls; let i = index" [formGroupName]="i" class="flex items-center mb-2">
+                <div class="flex flex-col w-full">
+                  <label for="ticket-name-{{i}}" class="font-light text-xs mb-2 text-white">Nombre</label>
+                  <input
+                    id="ticket-name-{{i}}"
+                    formControlName="name"
+                    type="text"
+                    placeholder="Nombre"
+                    class="ticket-input px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
+                  />
+                </div>
+                <div class="flex flex-col w-full ml-2">
+                  <label for="ticket-color-{{i}}" class="font-light text-xs mb-2 text-white">Color</label>
+                  <input
+                    id="ticket-color-{{i}}"
+                    formControlName="color"
+                    type="text"
+                    placeholder="Color"
+                    class="ticket-input px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
+                  />
+                </div>
+                <div class="flex flex-col w-full ml-2">
+                  <label for="ticket-quantity-{{i}}" class="font-light text-xs mb-2 text-white">Cantidad</label>
+                  <input
+                    id="ticket-quantity-{{i}}"
+                    formControlName="quantity"
+                    type="number"
+                    placeholder="Cantidad"
+                    class="ticket-input px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
+                  />
+                </div>
+                <div class="flex flex-col w-full ml-2">
+                  <label for="ticket-price-{{i}}" class="font-light text-xs mb-2 text-white">Precio</label>
+                  <input
+                    id="ticket-price-{{i}}"
+                    formControlName="price"
+                    type="number"
+                    step="0.01"
+                    placeholder="Precio"
+                    class="ticket-input px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
+                  />
+                </div>
+                <button type="button" (click)="removeTicket(i)" class="ml-2 text-red-500">Eliminar</button>
+              </div>
+              <button type="button" (click)="addTicket()" class="mt-2 px-4 pt-2.5 pb-4 bg-customBluelight2 rounded-xl text-white">Añadir Ticket</button>
+            </div>
           </div>
 
           <button type="submit" class="mt-6 px-4 pt-2.5 pb-4 w-[200px] text-base font-light leading-tight text-center text-white bg-amber-500 rounded-xl transition-transform duration-100 active:scale-105 active:bg-customOrange2">
