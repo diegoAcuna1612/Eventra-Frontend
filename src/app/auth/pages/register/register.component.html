@@ -17,6 +17,20 @@
               <input formControlName="email" type="email" id="email" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none" />
             </div>
 
+            <!-- Campo de tipo de usuario -->
+            <label for="user-type" class="mt-4 mb-1">Tipo de Usuario</label>
+            <div class="relative px-bd py-0.5 w-[300px]" style="background: linear-gradient(to right, #fa8d3b 19%, #41b8ff 82%);">
+              <select formControlName="userType" id="user-type" class="block w-full h-full p-2 bg-white text-customGray border-none focus:outline-none appearance-none">
+                <option value="organizer">Organizador</option>
+                <option value="client">Cliente</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg class="w-4 h-4 text-customG" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+
             <!-- Campo de Contraseña -->
             <label for="password" class="mt-4 mb-1">Contraseña</label>
             <div class="relative px-bd py-0.5 w-[300px]" style="background: linear-gradient(to right, #fa8d3b 19%, #41b8ff 82%);">

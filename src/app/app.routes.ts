@@ -12,10 +12,8 @@ import {RegisterComponent} from './auth/pages/register/register.component';
 import {RecoverPasswordComponent} from './auth/pages/recover-password/recover-password.component';
 import {ConfirmPasswordComponent} from './auth/pages/confirm-password/confirm-password.component';
 import {VerifyEmailComponent} from './auth/pages/verify-email/verify-email.component';
-import { CustomizeEventComponent } from './organizers/pages/customize-event/customize-event.component';
 import { ReviewEventRequestsComponent } from './organizers/components/review-event-requests/review-event-requests.component';
 import { EventStatisticsComponent } from './organizers/components/event-statistics/event-statistics.component';
-import {CustomizeeEventComponent} from './organizers/components/customize-event/customize-event.component';
 import {CreateEventComponent} from './organizers/pages/create-event/create-event.component';
 
 export const routes: Routes = [
@@ -36,7 +34,7 @@ export const routes: Routes = [
   {path: 'create-event', component: CreateEventComponent},
 
 
-  {path:'customize-event', component: CustomizeeEventComponent},
+  //{path:'customize-event', component: CustomizeeEventComponent},
   {path:'review-event-requests', component: ReviewEventRequestsComponent},
   {path:'event-statistics', component: EventStatisticsComponent},
 
