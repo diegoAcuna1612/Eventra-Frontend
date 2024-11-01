@@ -29,7 +29,7 @@ export class MyTicketsComponent implements OnInit{
     this.tickets = this.ticketService.getTickets();
   }
 
-
+/*
   user: User = {
     id: '78231412',
     username: 'Gustyes',
@@ -43,6 +43,6 @@ export class MyTicketsComponent implements OnInit{
     address: '',
     phone: '',
 
-  };
+  };*/
 
 }

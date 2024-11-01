@@ -17,6 +17,8 @@ import {SidebarComponent} from '../../../shared/components/sidebar/sidebar.compo
 })
 export class UpdateProfileComponent {
 
+  /*
+
   user: User = {
     id: '78231412',
     username: 'Gustyes',
@@ -30,5 +32,5 @@ export class UpdateProfileComponent {
     address: '',
     phone: '',
 
-  };
+  };*/
 }
