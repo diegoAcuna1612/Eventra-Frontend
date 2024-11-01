@@ -21,7 +21,11 @@ export class CreateEventComponent implements OnInit {
   eventForm!: FormGroup;
   private apiKey: string = '81a5476ca6d8a43a5f3fd455d2b9ad4a'; // Reemplaza con tu API key de imgBB
   imageUrl: string | null = null;
-
+  colors = [
+    { name: 'Blanco', hex: '#FFFFFF' },
+    { name: 'Platino', hex: '#C5C5C5' },
+    { name: 'Amarillo', hex: '#F8AA0D' }
+  ];
   constructor(private http:HttpClient,private fb: FormBuilder, private notificationService: NotificationService, private activitiesService: ActivitiesService) {}
 
   ngOnInit(): void {
@@ -166,8 +170,7 @@ onSubmit(): void {
 
   // Subir la imagen a imgBB antes de enviar los datos al backend
   const base64Photo = (this.eventForm.value.photo as string).replace(/^data:image\/[a-z]+;base64,/, '');
-  this.uploadImageToImgBB(base64Photo).then((imgBBUrl: string) => {  // Tipo explícito en imgBBUrl
-    // Cuando la subida a imgBB sea exitosa, construye el objeto formValue
+  this.uploadImageToImgBB(base64Photo).then((imgBBUrl: string) => {  
     const formValue = {
       ...this.eventForm.value,
       photo: imgBBUrl, // Usa la URL de imgBB en lugar de base64
