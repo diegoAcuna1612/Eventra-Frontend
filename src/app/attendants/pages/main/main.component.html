@@ -36,9 +36,12 @@
         class="self-center mt-4 w-full max-w-[876px] max-md:max-w-full"
       >
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center">
-          <app-card-event *ngFor="let event of paginatedEventsDestacados" [imageSrc]="event.imageSrc"
-                          [title]="event.title" [eventDate]="event.startEventDate" [tags]="event.tags"
-                          [price]="event.price"></app-card-event>
+          <app-card-event *ngFor="let event of paginatedEventsDestacados" 
+          [imageSrc]="event.Imagen"
+          [title]="event.Titulo"  
+          [fecha]="event.fecha"          
+          [tags]="event.tags"
+                          [price]="event.precio"></app-card-event>
         </div>
       </div>
     </div>
@@ -76,11 +79,12 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center">
           <app-card-event
             *ngFor="let event of paginatedEventsTendencias"
-            [imageSrc]="event.imageSrc"
-            [title]="event.title"
-            [eventDate]="event.startEventDate"
-            [tags]="event.tags"
-            [price]="event.price"
+            [imageSrc]="event.Imagen"
+            [title]="event.Titulo" 
+            [fecha]="formatDate(event.fecha)"  
+            [tags]="event.tags"    
+               
+            [price]="event.precio"
             [theme]="'blue'"
           ></app-card-event>
         </div>
@@ -113,9 +117,13 @@
       </div>
       <div class="mt-4 w-full max-w-[876px] max-md:max-w-full">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center">
-          <app-card-event *ngFor="let event of paginatedEventsDescubre" [imageSrc]="event.imageSrc"
-                          [title]="event.title" [eventDate]="event.startEventDate" [tags]="event.tags"
-                          [price]="event.price"></app-card-event>
+          <app-card-event *ngFor="let event of paginatedEventsDescubre" 
+          [imageSrc]="event.Imagen"
+          [title]="event.Titulo" 
+          [fecha]="formatDate(event.fecha)"  
+          [tags]="event.tags"              
+          [price]="event.precio">
+        </app-card-event>
         </div>
       </div>
       <a href="#more-events" class="mt-4 ml-8 text-xl font-semibold text-black">

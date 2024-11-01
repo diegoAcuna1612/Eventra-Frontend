@@ -20,7 +20,7 @@
         </div>
         <div class="flex flex-wrap gap-5 w-full">
           <app-card-event *ngFor="let event of paginatedEvents" [imageSrc]="event.imageSrc"
-                          [title]="event.title" [eventDate]="event.startEventDate" [tags]="event.tags"
+                          [title]="event.title" [fecha]="event.fecha" [tags]="event.tags"
                           [price]="event.price"></app-card-event>
         </div>
       </div>

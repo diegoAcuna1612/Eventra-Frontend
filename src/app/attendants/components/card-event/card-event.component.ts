@@ -33,5 +33,5 @@ export class CardEventComponent {
   @Input() tags!: string[];
   @Input() price!: number;
   @Input() theme: 'orange' | 'blue' = 'orange';
-  @Input() eventDate!: string;
+  @Input() fecha!: string; // Agregar este @Input para aceptar la fecha
 }
