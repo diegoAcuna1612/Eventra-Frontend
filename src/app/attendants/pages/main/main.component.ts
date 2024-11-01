@@ -2,7 +2,9 @@ import {Component} from '@angular/core';
 import {CardEventComponent} from '../../components/card-event/card-event.component';
 import {Event} from '../../model/event';
 import {NgForOf, NgOptimizedImage} from '@angular/common';
-
+import { ClientService } from '../../services/client.service';
+import { Client } from '../../model/client';
+import { UsersService } from '../../../auth/services/users.service';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -15,6 +17,16 @@ import {NgForOf, NgOptimizedImage} from '@angular/common';
   styleUrl: './main.component.css'
 })
 export class MainComponent {
+  userId: string | null = '';
+  idClient: string | null = null;
+  idBusiness: string | null = null;
+  constructor(private clientService: ClientService,private usersService: UsersService) {
+     
+  }
+  ngOnInit(){
+
+  }
+  
   events: Event[] = [
     {
       imageSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/903365effa8c75f6365b38f2656a8860ddda2a7b54fd897366503d28f5ac171e?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81',

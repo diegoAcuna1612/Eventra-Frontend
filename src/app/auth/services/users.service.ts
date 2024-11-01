@@ -16,6 +16,9 @@ export class UsersService {
   getUsers(): Observable<any> {
     return this.http.get(`${this.domain}${this.endpoint}`);
   }
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.domain}${this.endpoint}/${userId}`);
+  }
 
   createUser(user: User): Observable<any> {
     return this.http.post(`${this.domain}${this.endpoint}/register`, user);

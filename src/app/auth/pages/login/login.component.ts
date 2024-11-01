@@ -30,7 +30,8 @@ export class LoginComponent {
 
     this.usersService.loginUser(loginData).subscribe({
       next: (response) => {
-        console.log('Login successful', response);
+
+        localStorage.setItem('userId', response.id);
         this.router.navigate(['/home']);
       },
       error: (error) => {

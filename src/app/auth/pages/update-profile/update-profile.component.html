@@ -3,7 +3,7 @@
     class="self-center pt-5 pr-6 pb-2 mt-10 mb-10 max-w-full bg-customGray rounded-[20px] w-[889px] max-md:pr-5 max-md:mt-10">
     <div class="flex mb-2 max-md:flex-col">
 
-      <app-sidebar [user]="user" class="w-[22%] max-md:w-full"></app-sidebar>
+      <app-sidebar  class="w-[22%] max-md:w-full"></app-sidebar>
       <div
         class="shrink-0 w-px border border-white border-solid self-stretch"
       ></div>
@@ -17,10 +17,10 @@
               <div class="flex flex-col w-[45%] max-md:ml-0 max-md:w-full">
                 <div class="flex flex-col grow items-start text-xl font-light text-neutral-400 max-md:mt-6">
                   <label for="username">Usuario</label>
-                  <input id="username" type="text" [(ngModel)]="user.username"
+                  <input id="username" type="text"
                          class="self-stretch px-2 py-px mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5"/>
                   <label for="fullname" class="mt-4 text-white">Nombres y Apellidos</label>
-                  <input id="fullname" type="text" [(ngModel)]="user.fullname"
+                  <input id="fullname" type="text" 
                          class="self-stretch px-2 py-px mt-1.5 text-white whitespace-nowrap border border-white bg-zinc-300 bg-opacity-0 max-md:pr-5"/>
                 </div>
               </div>
@@ -34,10 +34,10 @@
                       <i class="pi pi-star-fill mt-0.5 text-green-500"></i>
                     </div>
                   </div>
-                  <input id="email" type="email" [(ngModel)]="user.email"
+                  <input id="email" type="email"
                          class="self-stretch text-neutral-400 px-2 mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5"/>
                   <label for="birthdate" class="mt-4 text-white">Fecha de Nacimiento</label>
-                  <input id="birthdate" type="date" [(ngModel)]="user.birthdate"
+                  <input id="birthdate" type="date" 
                          class="date-input px-2 mt-1.5 self-stretch text-white whitespace-nowrap border border-white bg-zinc-300 bg-opacity-0 max-md:pr-5"/>
                 </div>
               </div>
@@ -48,17 +48,17 @@
             <div class="flex gap-5 max-md:flex-col text-xl font-light text-white">
               <div class="flex flex-col w-[30%] mt-4 max-md:w-full">
                 <label for="dni">DNI</label>
-                <input id="dni" type="text" [(ngModel)]="user.dni"
+                <input id="dni" type="text"
                        class="flex shrink-0 px-2 mt-1.5 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px]"/>
               </div>
               <div class="flex flex-col w-[30%] pl-1 mt-4 max-md:w-full max-md:pl-0">
                 <label for="country">País</label>
-                <input id="country" type="text" [(ngModel)]="user.country"
+                <input id="country" type="text" 
                        class="flex shrink-0 px-2 mt-1.5 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px]"/>
               </div>
               <div class="relative flex flex-col w-[30%] pl-1 mt-4 max-md:w-full max-md:pl-0">
                 <label for="gender">Género</label>
-                <select id="gender" [(ngModel)]="user.gender"
+                <select id="gender"
                         class="flex shrink-0 mt-1.5 border px-2 border-white border-solid bg-customGray text-white h-[30px]">
                   <option value="male"
                           class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">
@@ -79,7 +79,7 @@
 
           <div class="flex flex-col mt-4 text-xl font-light text-white w-full max-md:w-full max-md:pl-0">
             <label for="address" class="self-start">Dirección</label>
-            <input id="address" type="text" [(ngModel)]="user.address"
+            <input id="address" type="text"
                    class="flex shrink-0 mt-1.5 px-2 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] w-[calc(100%-20px)] max-md:w-full"/>
           </div>
 
@@ -94,7 +94,7 @@
                        class="object-contain shrink-0 my-auto rounded aspect-[1.47] w-[25px]" alt=""/>
                   <span>+51</span>
                 </div>
-                <input id="phone" type="text" [(ngModel)]="user.phone"
+                <input id="phone" type="text" 
                        class="flex shrink-0 mt-1 px-2 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] w-[200px] max-md:mr-2.5"/>
               </div>
               <button
