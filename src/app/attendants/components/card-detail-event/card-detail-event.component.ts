@@ -20,7 +20,7 @@ export class CardDetailEventComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    const eventId = '4';
+    const eventId = '1';
 
     this.eventService.getActivityById(eventId).subscribe(
       (eventData) => {
