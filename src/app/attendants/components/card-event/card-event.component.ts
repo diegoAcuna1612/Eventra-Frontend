@@ -20,18 +20,19 @@ export class CardEventComponent {
   constructor(private router: Router) {}
 
   navigateToEventDetails() {
-    console.log('Navigating to event details:', this.event.title);
-    this.router.navigate(['/info-event']);
+   
+      this.router.navigate(['/info-event/1']);
+   
   }
-
+  
   navigateToEventInfo() {
-    this.router.navigate(['/info-event']);
+      this.router.navigate(['/info-event/1']);
   }
-
+  
   @Input() imageSrc!: string;
   @Input() title!: string;
   @Input() tags!: string[];
   @Input() price!: number;
   @Input() theme: 'orange' | 'blue' = 'orange';
-  @Input() fecha!: string; // Agregar este @Input para aceptar la fecha
+  @Input() fecha!: string; 
 }

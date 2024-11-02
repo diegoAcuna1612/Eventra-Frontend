@@ -1,7 +1,7 @@
 <div
   class="flex relative flex-col pt-80 w-full rounded-xl min-h-[510px] max-md:pt-24 max-md:mt-7 max-md:max-w-full"
 >
-  <img [src]="event.imageSrc" [alt]="event.title" class="object-cover absolute inset-0 size-full rounded-[10px]" />
+  <img [src]="event.photo" [alt]="event.name" class="object-cover absolute inset-0 size-full rounded-[10px]" />
 
   <div
     class="relative pt-6 w-full rounded-sm shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:pr-5 max-md:max-w-full"
@@ -19,7 +19,7 @@
               id="event-title"
               class="mr-4 ml-3.5 text-xl text-white max-md:mx-2.5"
             >
-              {{event.title}}
+              {{event.name}}
             </h1>
 
             <div
@@ -35,11 +35,11 @@
 
                 <div class="flex gap-1 items-center text-6 mt-1 text-white max-md:mr-2.5">
                   <i class="pi pi-calendar text-xs "></i>
-                  <time datetime="2024-11-02 ">{{ event.fecha }}</time>
+                  <time datetime="2024-11-02 ">{{ event.fechas_eventos }}</time>
                 </div>
                 <div class="flex gap-1 items-center text-6 mt-1 text-white max-md:mr-2.5">
                   <i class="pi pi-calendar text-xs "></i>
-                  <time datetime="2024-11-03">{{ event.fecha }}</time>
+                  <time datetime="2024-11-03">{{ event.fechas_eventos }}</time>
                 </div>
 
               </div>
@@ -48,33 +48,13 @@
                 class="flex flex-col my-auto text-xs text-white whitespace-nowrap"
               >
                 <div class="self-start px-1.5 py-0.5 bg-customOrange max-md:ml-2">
-                  {{ event.hour }}
+                    4:00 PM
                 </div>
 
               </div>
             </div>
 
-            <div class="flex gap-5 mt-3.5 items-center">
-              <!--cambiar por imagenes de auspiciadores-->
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/f44146dbf8a1fd68403919d781137db79e84eaf642aa8a8a36b6118672454432?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81"
-                alt="Event location"
-                class="object-contain shrink-0 aspect-[3.46] w-[83px]"
-              />
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/cf0b8870a122b359e574b3ad85dc9f2d4e2c226d4073337a0a57c35b48f3000d?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81"
-                alt="Share event"
-                class="object-contain shrink-0 my-auto w-5 aspect-square"
-              />
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/69c59e7c81de2d02e163875d8988795e288afaa5c6328e4a1a75807dbe140c6f?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81"
-                alt="Event rating"
-                class="object-contain  aspect-[4.63] w-[74px]"
-              />
-            </div>
+            
           </div>
           <div
             class="shrink-0 w-px border border-white border-solid h-[162px]"

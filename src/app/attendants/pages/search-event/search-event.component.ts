@@ -30,6 +30,7 @@ export class SearchEventComponent implements OnInit {
   };
   events: Event[] = [
     {
+      id:'1',
       imageSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/903365effa8c75f6365b38f2656a8860ddda2a7b54fd897366503d28f5ac171e?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81',
       title: 'Voley ProLeague - Week #1',
       description: 'La mejor liga de voley del mundo',
@@ -38,62 +39,6 @@ export class SearchEventComponent implements OnInit {
       price: 20.00,
       location: 'Estadio Nacional',
       rating: 4.5,
-      hour: '8:00 PM'
-    },
-    {
-      imageSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/fe8f7093a7a8ea317127f9ca14f30bfe3af150e90a374517b1f50501b9802292?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81',
-      title: 'Gran Festival de la Cumbia',
-      description: 'Los mejores artistas de cumbia en un solo lugar',
-      fecha: '14 de noviembre 2024',
-      tags: ['Musica', 'Cumbia', 'Salsa', 'Varios', 'Baile'],
-      price: 10.00,
-      location: 'Estadio Nacional',
-      rating: 4.5,
-      hour: '8:00 PM'
-
-    },
-    {
-      imageSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/d8911172a27426a6344fd019f4ecc522b7f1fd6dd791bc446fb6c7e8fc53997d?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81',
-      title: 'Un dia como hoy',
-      description: 'Obra de teatro de comedia',
-      fecha: '14 de noviembre 2024',
-      tags: ['Teatro', 'Entretenimiento', 'Gratis', 'Actores'],
-      price: 0.00,
-      location: 'Teatro Municipal',
-      rating: 4.5,
-      hour: '8:00 PM'
-    },
-    {
-      imageSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/c2adb1d8e01ed94397b13d4c1302e949c6008420a246462a35fd8eb18d72d7ff?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81',
-      title: 'Daniela Darcourt - Lima',
-      description: 'Concierto de salsa',
-      fecha: '14 de noviembre 2024',
-      tags: ['Musica', 'Entretenimiento', 'Salsa', 'Concierto'],
-      price: 50.00,
-      location: 'Estadio Nacional',
-      rating: 4.5,
-      hour: '8:00 PM'
-    },
-    {
-      imageSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81',
-      title: 'Concierto de Rock',
-      description: 'Concierto de rock en vivo',
-      fecha: '14 de noviembre 2024',
-      tags: ['Musica', 'Rock', 'Concierto'],
-      price: 30.00,
-      location: 'Estadio Nacional',
-      rating: 4.5,
-      hour: '8:00 PM'
-    },
-    {
-      imageSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81',
-      title: 'Feria de Gastronomía',
-      description: 'Feria de comida peruana',
-      fecha: '14 de noviembre 2024',
-      tags: ['Gastronomia', 'Feria', 'Comida'],
-      price: 15.00,
-      location: 'Estadio Nacional',
-      rating: 5,
       hour: '8:00 PM'
     }
   ];

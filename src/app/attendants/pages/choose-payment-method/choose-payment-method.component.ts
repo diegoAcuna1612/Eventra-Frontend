@@ -46,24 +46,23 @@ export class ChoosePaymentMethodComponent{
   }
 
   buyTickets(): void {
+    this.router.navigate(['/purchase-success']);
+    /*
+    
     if (!this.selectedMethod) {
       this.errorMessage = 'Por favor, seleccione un método de pago.';
       return;
     }
   
-    // Asignar imageUrl por defecto si falta en el primer ticket
     const ticketToBuy = {
       ...this.tickets[0],
       imageUrl: this.tickets[0].imageUrl || 'http://example.com'
     };
   
-    // Mostrar el objeto ticket en la consola antes de enviar la solicitud
     console.log("Objeto ticket a comprar:", ticketToBuy);
   
-    // Enviar solicitud POST al backend con un solo ticket
     this.ticketService.buyTicket(ticketToBuy).subscribe({
       next: (response) => {
-        // Redirigir a la página de éxito si la compra es exitosa
         this.router.navigate(['/purchase-success'], { queryParams: { ticket: JSON.stringify(ticketToBuy) } });
       },
       error: (error) => {
@@ -71,6 +70,7 @@ export class ChoosePaymentMethodComponent{
         this.errorMessage = 'Fallo en la operación de compra: ' + error.message;
       }
     });
+    */
   }
   
 
