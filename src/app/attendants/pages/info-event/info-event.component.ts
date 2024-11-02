@@ -1,38 +1,93 @@
 import { Component } from '@angular/core';
 import {CardDetailEventComponent} from '../../components/card-detail-event/card-detail-event.component';
-import {Event} from '../../model/event';
-import {Router} from '@angular/router';
-
+import {Activity} from '../../model/activity';
+import { ActivatedRoute, Router } from '@angular/router';
+import {EventService} from '../../services/event.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-info-event',
   standalone: true,
   imports: [
-    CardDetailEventComponent
+    CardDetailEventComponent,
+    CommonModule
 
   ],
   templateUrl: './info-event.component.html',
   styleUrl: './info-event.component.css'
 })
 export class InfoEventComponent {
-  event!: Event;
+  event!: Activity;
   vipTickets: number = 0;
   plateaTickets: number = 0;
   generalTickets: number = 0;
   total: number = 0;
+  eventId: string = ''; // Almacena el `eventId` aquí
 
-  constructor( private router: Router) {
-    this.event = {
-      imageSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/f2790b2b367c665857d18185698c40babd0f2cce934fe331ae413b7e0a65d55f?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81",
-      title: 'Billie Eilish - IILU 204',
-      description: 'Events HerePeru se enorgullece de presentar, junto a Pepsi e Interbank, un evento histórico: Billie Eilish en concierto. Con 7 premios Grammy en su haber, Billie es una de las artistas más influyentes de la actualidad, conocida por su estilo único y revolucionario. No te pierdas la oportunidad de verla en un espectáculo inolvidable que tendrá lugar en una fecha doble.',
-      startEventDate: '3 de noviembre 2024',
-      endEventDate: '4 de noviembre 2024',
-      tags: ['Musica', 'Cumbia', 'Salsa', 'Varios', 'Baile'],
-      price: 50,
-      location: 'Lima, Peru',
-      rating: 4.5,
-      hour: '8:00 PM',
-    };
+
+  constructor(   private route: ActivatedRoute, 
+    private router: Router,
+    private eventService: EventService 
+  ) {
+  }
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const eventId = params.get('id');
+      if (eventId) {
+        this.eventId = eventId; // Asigna `eventId` a la propiedad del componente
+        console.log("SI LLEGO EL VALOR DEL ID al info:", eventId);
+        this.loadEventDetails(eventId); 
+      }
+    });
+  }
+  loadEventDetails(eventId: string) {
+    /*
+    this.eventService.getActivityById(eventId).subscribe(
+      (activityData) => {
+        // Asigna directamente los datos de `activityData` al `event`
+        this.event = {
+          id: activityData.id,
+          name: activityData.name || 'Título por defecto',
+          description: activityData.description || 'Descripción por defecto',
+          photo: activityData.photo || '',
+          location: activityData.location || 'Ubicación no disponible',
+          tags: activityData.tags || [],
+          fechas_eventos: activityData.fechas_eventos || [],
+          tickets: activityData.tickets || [],
+          businessId: activityData.businessId || ''
+        };
+  
+        // Opcionalmente, puedes extraer precios de `tickets` para cálculos de entradas
+        const vipTicket = activityData.tickets.find(ticket => ticket.name === 'VIP Golden Access');
+        const plateaTicket = activityData.tickets.find(ticket => ticket.name === 'Platea');
+        const generalTicket = activityData.tickets.find(ticket => ticket.name === 'General');
+  
+        //this.updateTicketPrices(vipTicket, plateaTicket, generalTicket);
+      },
+      (error) => {
+        console.error('Error al cargar los datos del evento:', error);
+      }
+    );
+    */
+    this.eventService.getActivityById(eventId).subscribe(
+      (activityData) => {
+        this.event = activityData;
+      },
+      (error) => {
+        console.error('Error al cargar los datos del evento:', error);
+      }
+    );
+  }
+  
+  formatFecha(fecha: string): string {
+    const date = new Date(fecha);
+    const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const dayName = daysOfWeek[date.getUTCDay()];
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+    const year = date.getUTCFullYear();
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    return `${dayName}: ${day}/${month}/${year} ${hours}:${minutes}`;
   }
 
   increaseTickets(type: string) {
@@ -67,9 +122,11 @@ export class InfoEventComponent {
       { type: 'Platea', quantity: this.plateaTickets, price: 250 },
       { type: 'General', quantity: this.generalTickets, price: 125 }
     ];
-
-    this.router.navigate(['/choose-payment-method'], {state: {tickets, total: this.total}}).then(r => console.log(r));
-   }
+  
+    // Navega a `choose-payment-method/{eventId}` pasando `tickets` y `total` en el estado
+    this.router.navigate([`/choose-payment-method`, this.eventId], { state: { tickets, total: this.total } })
+      .then(r => console.log("Navegación exitosa:", r));
+  }
 
 
 }

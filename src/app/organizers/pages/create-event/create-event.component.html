@@ -3,12 +3,13 @@
     <div class="flex gap-10 justify-center max-md:flex-col">
       <aside class="flex flex-col w-[42%] max-md:ml-0 max-md:w-full justify-center">
         <figure class="flex flex-col text-base font-light leading-tight text-center text-white max-md:mt-10 max-md:max-w-full">
-          <img loading="lazy" [src]="eventForm.get('imageSrc')?.value" alt="Event preview image" class="object-cover w-full rounded-2xl aspect-[4/3] cursor-pointer" (click)="fileInput.click()" />
+          <img loading="lazy" [src]="eventForm.get('photo')?.value" alt="Event preview image" class="object-cover w-full rounded-2xl aspect-[4/3] cursor-pointer" (click)="fileInput.click()" />
           <input type="file" #fileInput (change)="onFileChange($event)" class="hidden" />
           <button class="flex flex-col self-center mt-8 max-w-full bg-amber-500 rounded-xl px-4 pt-2.5 pb-4 transition-transform duration-100 active:scale-105 active:bg-customOrange2" (click)="fileInput.click()">
             Actualizar imagen
           </button>
         </figure>
+        
       </aside>
 
       <article class="flex flex-col ml-5 w-[58%] max-md:ml-0 max-md:w-full">
@@ -17,10 +18,10 @@
         <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="flex flex-col mt-3 w-full max-md:mt-10 max-md:max-w-full">
 
           <div class="flex flex-col text-base rounded-md border border-solid border-zinc-400 text-zinc-500 max-md:max-w-full">
-            <label for="eventName" class="sr-only">Nombre del Evento</label>
+            <label for="name" class="sr-only">Nombre del Evento</label>
             <input
-              id="eventName"
-              formControlName="eventName"
+              id="name"
+              formControlName="name"
               type="text"
               placeholder="Nombre del Evento"
               class="z-10 py-3.5 pr-20 pl-5 bg-customGray rounded-md focus:outline-none text-white max-md:pr-5 max-md:max-w-full"
@@ -29,18 +30,18 @@
 
           <div class="flex flex-wrap gap-6 mt-6">
             <div class="flex flex-col flex-1 relative">
-              <label for="category" class="sr-only">Categoría</label>
+              <label for="tags" class="sr-only">Categoría</label>
               <input
-                id="category"
-                formControlName="categoryInput"
-                (keydown.enter)="addCategory($event)"
+                id="tags"
+                formControlName="tagsInput"
+                (keydown.enter)="addTags($event)"
                 placeholder="Categoría"
                 class="appearance-none px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 focus:outline-none text-white w-full"
               />
               <div class="mt-2 flex flex-wrap gap-2">
-                <span *ngFor="let category of eventForm.get('category')?.value" class="bg-customG text-white px-2 py-1 rounded">
-                  {{ category }}
-                  <button type="button" (click)="removeCategory(category)" class="ml-2 text-red-600">x</button>
+                <span *ngFor="let tags of eventForm.get('tags')?.value" class="bg-customG text-white px-2 py-1 rounded">
+                  {{ tags }}
+                  <button type="button" (click)="removeTags(tags)" class="ml-2 text-red-600">x</button>
                 </span>
               </div>
             </div>
@@ -56,9 +57,9 @@
             </div>-->
 
             <div class="flex flex-col flex-1">
-              <label for="dates" class="sr-only">Fechas</label>
-              <div formArrayName="dates">
-                <div *ngFor="let date of dates.controls; let i = index" [formGroupName]="i" class="flex items-center mb-2">
+              <label for="fechas_eventos" class="sr-only">Fechas</label>
+              <div formArrayName="fechas_eventos">
+                <div *ngFor="let fechas_eventos of fechas_eventos.controls; let i = index" [formGroupName]="i" class="flex items-center mb-2">
                   <input
                     id="date-{{i}}"
                     formControlName="date"
@@ -129,14 +130,17 @@
                 </div>
                 <div class="flex flex-col w-full ml-2">
                   <label for="ticket-color-{{i}}" class="font-light text-xs mb-2 text-white">Color</label>
-                  <input
+                  <select
                     id="ticket-color-{{i}}"
                     formControlName="color"
-                    type="text"
-                    placeholder="Color"
                     class="ticket-input px-3 pt-3.5 pb-3.5 bg-customGray rounded-md border border-solid border-zinc-400 text-white focus:outline-none w-full"
-                  />
+                  >
+                    <option *ngFor="let color of colors" [value]="color.hex">
+                      {{ color.name }}
+                    </option>
+                  </select>
                 </div>
+                
                 <div class="flex flex-col w-full ml-2">
                   <label for="ticket-quantity-{{i}}" class="font-light text-xs mb-2 text-white">Cantidad</label>
                   <input

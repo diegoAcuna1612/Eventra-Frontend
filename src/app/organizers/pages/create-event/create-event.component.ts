@@ -2,6 +2,8 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NotificationService} from '../../../shared/services/notification.service';
 import {NgForOf} from '@angular/common';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { ActivitiesService } from '../../services/activities.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-event',
@@ -17,19 +19,39 @@ import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from
 export class CreateEventComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   eventForm!: FormGroup;
-
-  constructor(private fb: FormBuilder, private notificationService: NotificationService) {}
+  private apiKey: string = '81a5476ca6d8a43a5f3fd455d2b9ad4a'; // Reemplaza con tu API key de imgBB
+  imageUrl: string | null = null;
+  colors = [
+    { name: 'Blanco', hex: '#FFFFFF' },
+    { name: 'Platino', hex: '#C5C5C5' },
+    { name: 'Amarillo', hex: '#F8AA0D' }
+  ];
+  constructor(private http:HttpClient,private fb: FormBuilder, private notificationService: NotificationService, private activitiesService: ActivitiesService) {}
 
   ngOnInit(): void {
     this.eventForm = this.fb.group({
-      imageSrc: ['https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg', Validators.required],
-      eventName: ['', Validators.required],
-      category: [[], Validators.required],
-      categoryInput: [''],
-      dates: this.fb.array([this.createDateGroup()]),
+      photo: ['https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg', Validators.required],
+      name: ['', Validators.required],
+      tags: [[], Validators.required],
+      tagsInput: [''],
+      fechas_eventos: this.fb.array([this.createDateGroup()]),
       location: ['', Validators.required],
       description: ['', Validators.required],
       tickets: this.fb.array([this.createTicketGroup()])
+    });
+
+      // Escucha cambios en el formulario y los imprime en consola
+    this.eventForm.valueChanges.subscribe(value => {
+      console.log('Formulario actualizado:', value);
+    });
+     // Escucha cambios en el campo fechas_eventos y convierte a ISO 8601
+    this.fechas_eventos.valueChanges.subscribe((fechas: any) => {
+      fechas.forEach((fechaEvento: { date: string, time: string }, index: number) => {
+        if (fechaEvento.date && fechaEvento.time) {
+          const date = new Date(`${fechaEvento.date}T${fechaEvento.time}`);
+          console.log(`Fecha y hora en formato ISO 8601 (evento ${index + 1}):`, date.toISOString());
+        }
+      });
     });
   }
 
@@ -54,26 +76,26 @@ export class CreateEventComponent implements OnInit {
     this.tickets.removeAt(index);
   }
 
-  addCategory(event: any): void {
+  addTags(event: any): void {
     event.preventDefault();
-    const categoryInput = this.eventForm.get('categoryInput')?.value.trim();
-    const categories = this.eventForm.get('category')?.value;
+    const tagsInput = this.eventForm.get('tagsInput')?.value.trim();
+    const categories = this.eventForm.get('tags')?.value;
 
-    if (categoryInput && categories.length < 4 && !categories.includes(categoryInput)) {
-      categories.push(categoryInput);
-      this.eventForm.get('category')?.setValue(categories);
-      this.eventForm.get('categoryInput')?.reset();
+    if (tagsInput && categories.length < 4 && !categories.includes(tagsInput)) {
+      categories.push(tagsInput);
+      this.eventForm.get('tags')?.setValue(categories);
+      this.eventForm.get('tagsInput')?.reset();
     }
   }
 
-  removeCategory(category: string): void {
-    const categories = this.eventForm.get('category')?.value.filter((c: string) => c !== category);
-    this.eventForm.get('category')?.setValue(categories);
+  removeTags(tags: string): void {
+    const categories = this.eventForm.get('tags')?.value.filter((c: string) => c !== tags);
+    this.eventForm.get('tags')?.setValue(categories);
   }
 
 
-  get dates(): FormArray {
-    return this.eventForm.get('dates') as FormArray;
+  get fechas_eventos(): FormArray {
+    return this.eventForm.get('fechas_eventos') as FormArray;
   }
 
   createDateGroup(): FormGroup {
@@ -84,48 +106,99 @@ export class CreateEventComponent implements OnInit {
   }
 
   addDate(): void {
-    this.dates.push(this.createDateGroup());
+    this.fechas_eventos.push(this.createDateGroup());
   }
 
   removeDate(index: number): void {
-    this.dates.removeAt(index);
+    this.fechas_eventos.removeAt(index);
   }
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      const allowedTypes = ['image/jpeg', 'image/png'];
-      const maxSize = 2 * 1024 * 1024; // 2MB
-
-      if (!allowedTypes.includes(file.type)) {
-        this.notificationService.showNotification('Formato de imagen no permitido. Solo se permiten JPEG y PNG.');
-        return;
-      }
-
-      if (file.size > maxSize) {
-        this.notificationService.showNotification('El tamaño de la imagen no debe exceder los 2MB.');
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.eventForm.patchValue({
-          imageSrc: reader.result as string
+      this.convertFileToBase64(file).then(base64Image => {
+        this.uploadImageToImgBB(base64Image).then((imgBBUrl: string) => {
+          this.eventForm.patchValue({ photo: imgBBUrl }); // Actualiza con la URL de imgBB
         });
-      };
+      });
+    }
+  }
+  
+  // Método para convertir el archivo a base64
+  convertFileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve((reader.result as string).split(',')[1]); // Obtener solo el base64
+      reader.onerror = error => reject(error);
       reader.readAsDataURL(file);
-    }
+    });
+  }
+  
+  // Método para subir la imagen a imgBB
+  uploadImageToImgBB(base64Image: string): Promise<string> {
+    const formData = new FormData();
+    formData.append('image', base64Image);
+  
+    return this.http.post(`https://api.imgbb.com/1/upload?key=${this.apiKey}`, formData)
+      .toPromise()
+      .then((response: any) => response.data.url as string) // Devuelve la URL de la imagen subida
+      .catch((error) => {
+        console.error('Error en la subida a imgBB:', error);
+        throw error;
+      });
+  }
+  
+  
+onSubmit(): void {
+  if (this.eventForm.invalid) {
+    this.notificationService.showNotification('Por favor, completa todos los campos requeridos.');
+    return;
   }
 
-  onSubmit(): void {
-    if (this.eventForm.invalid) {
-      this.notificationService.showNotification('Por favor, completa todos los campos requeridos.');
-      return;
-    }
-
-    // falta la logica
-
-    console.log('Formulario enviado', this.eventForm.value);
-    this.notificationService.showNotification('Evento guardado y publicado con éxito.');
+  // Obtener el userId desde localStorage
+  const userId = localStorage.getItem('userId');
+  if (!userId) {
+    this.notificationService.showNotification('No se encontró el usuario. Inicia sesión nuevamente.');
+    return;
   }
+
+  // Mapeo para que fechas_eventos sea un array de strings en formato ISO 8601
+  const fechasEventos = this.eventForm.value.fechas_eventos.map((fechaEvento: { date: string, time: string }) => {
+    const date = new Date(`${fechaEvento.date}T${fechaEvento.time}`);
+    return date.toISOString();
+  });
+
+  // Subir la imagen a imgBB antes de enviar los datos al backend
+  const base64Photo = (this.eventForm.value.photo as string).replace(/^data:image\/[a-z]+;base64,/, '');
+  this.uploadImageToImgBB(base64Photo).then((imgBBUrl: string) => {  
+    const formValue = {
+      ...this.eventForm.value,
+      photo: imgBBUrl, // Usa la URL de imgBB en lugar de base64
+      fechas_eventos: fechasEventos,
+      businessId: Number(userId)
+    };
+
+    console.log('Datos del formulario a enviar:', formValue);
+
+    // Llamada al servicio para enviar los datos al backend
+    this.activitiesService.createActivity(formValue).subscribe({
+      next: (response) => {
+        console.log('Evento creado con éxito:', response);
+        this.notificationService.showNotification('Evento guardado y publicado con éxito.');
+      },
+      error: (error) => {
+        console.error('Error al crear el evento:', error);
+        this.notificationService.showNotification('Hubo un error al guardar el evento. Inténtalo nuevamente.');
+      }
+    });
+  }).catch((error) => {
+    console.error('Error al subir la imagen a imgBB:', error);
+    this.notificationService.showNotification('Hubo un error al subir la imagen. Inténtalo nuevamente.');
+  });
+}
+
+
+  
+  
+  
 }

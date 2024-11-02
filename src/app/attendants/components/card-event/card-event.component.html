@@ -1,4 +1,4 @@
-<div class="flex flex-col w-3/12 max-md:ml-0 max-md:w-full" (click)="navigateToEventDetails()">
+<div class="flex flex-col w-3/12 max-md:ml-0 max-md:w-full" (click)="onCardClick()">
   <div class="flex relative flex-col grow pt-40 text-white rounded-xl aspect-[0.765] w-[195px] max-md:pt-24 max-md:mt-8 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
     <img
       loading="lazy"
@@ -21,7 +21,7 @@
 
         <div class="flex items-center px-2 mt-1 max-md:px-3" [ngClass]="{ 'text-customGray': theme === 'blue' }">
           <i class="pi pi-calendar text-xxs mr-1"></i>
-          <span class="text-xxs" >{{ eventDate }}</span>
+          <span class="text-xxs" >{{ fecha }}</span>
         </div>
 
         <div class="relative flex justify-between px-1.5 py-0.5 mt-3.5 text-xxs max-md:px-2" [ngClass]="theme === 'blue' ? 'bg-customBluelight2' : 'bg-customOrange'">
@@ -35,7 +35,8 @@
           </div>
           <button class="flex items-center justify-center px-2.5 py-0.5 my-auto text-6 whitespace-nowrap rounded shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
                   [ngClass]="theme === 'blue' ? 'bg-customBluelight' : 'bg-customOrange2'"
-                  (click)="navigateToEventInfo()">
+                  (click)="onCardClick()"
+                  (click)="navigateToEventInfo()" >
             Comprar
           </button>
         </div>

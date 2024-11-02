@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { UsersService } from '../../services/users.service';  // Asegúrate de tener el servicio UsersService importado
+import { UsersService } from '../../services/users.service';  // Importa UsersService
+import { User } from '../../model/user';  // Importa el modelo User
 
 @Component({
   selector: 'app-login',
@@ -19,25 +20,22 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router, private usersService: UsersService) { }
+  constructor(private router: Router, private usersService: UsersService) {}
 
   onSubmit() {
-    // Crear el objeto de datos de login
-    const loginData = {
+    const loginData: Partial<User> = {
       email: this.email,
       password: this.password
     };
 
-    // Llamar al servicio de login
     this.usersService.loginUser(loginData).subscribe({
       next: (response) => {
-        console.log('Login successful', response);
-        // Redirigir al home después del login exitoso
+
+        localStorage.setItem('userId', response.id);
         this.router.navigate(['/home']);
       },
       error: (error) => {
         console.error('Login error:', error);
-        // Mostrar un mensaje de error o manejarlo como sea necesario
         alert('Error al iniciar sesión');
       }
     });

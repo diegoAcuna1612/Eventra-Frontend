@@ -36,9 +36,17 @@
         class="self-center mt-4 w-full max-w-[876px] max-md:max-w-full"
       >
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center">
-          <app-card-event *ngFor="let event of paginatedEventsDestacados" [imageSrc]="event.imageSrc"
-                          [title]="event.title" [eventDate]="event.startEventDate" [tags]="event.tags"
-                          [price]="event.price"></app-card-event>
+          <app-card-event *ngFor="let event of paginatedEventsDestacados" 
+          [id]="event.id.toString()"
+          [imageSrc]="event.Imagen"
+          [title]="event.Titulo"  
+          [fecha]="formatDate(event.fecha)"  
+          [tags]="event.tags"
+          [price]="event.precio"
+          (eventClicked)="onEventClicked($event)">
+
+          >
+        </app-card-event>
         </div>
       </div>
     </div>
@@ -76,11 +84,13 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center">
           <app-card-event
             *ngFor="let event of paginatedEventsTendencias"
-            [imageSrc]="event.imageSrc"
-            [title]="event.title"
-            [eventDate]="event.startEventDate"
-            [tags]="event.tags"
-            [price]="event.price"
+            [id]="event.id.toString()"
+          [imageSrc]="event.Imagen"
+          [title]="event.Titulo"  
+          [fecha]="formatDate(event.fecha)"  
+          [tags]="event.tags"
+          [price]="event.precio"
+          (eventClicked)="onEventClicked($event)"
             [theme]="'blue'"
           ></app-card-event>
         </div>
@@ -113,9 +123,15 @@
       </div>
       <div class="mt-4 w-full max-w-[876px] max-md:max-w-full">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 justify-center">
-          <app-card-event *ngFor="let event of paginatedEventsDescubre" [imageSrc]="event.imageSrc"
-                          [title]="event.title" [eventDate]="event.startEventDate" [tags]="event.tags"
-                          [price]="event.price"></app-card-event>
+          <app-card-event *ngFor="let event of paginatedEventsDescubre" 
+          [id]="event.id.toString()"
+          [imageSrc]="event.Imagen"
+          [title]="event.Titulo"  
+          [fecha]="formatDate(event.fecha)"  
+          [tags]="event.tags"
+          [price]="event.precio"
+          (eventClicked)="onEventClicked(event.id.toString())"> <!-- Llama a `onEventClicked` pasando el `event.id` -->
+        </app-card-event>
         </div>
       </div>
       <a href="#more-events" class="mt-4 ml-8 text-xl font-semibold text-black">

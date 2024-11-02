@@ -1,9 +1,9 @@
 export interface Event{
+    id:string;
     imageSrc: string;
     title: string;
     description: string;
-    startEventDate: string;
-    endEventDate: string;
+    fecha:string;
     tags: string[];
     price: number;
     location:string;

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment.prod';
-
+import { environment } from '../../../environments/environment';
+import { User } from '../model/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,12 +16,15 @@ export class UsersService {
   getUsers(): Observable<any> {
     return this.http.get(`${this.domain}${this.endpoint}`);
   }
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.domain}${this.endpoint}/${userId}`);
+  }
 
-  createUser(user: any): Observable<any> {
+  createUser(user: User): Observable<any> {
     return this.http.post(`${this.domain}${this.endpoint}/register`, user);
   }
 
-  loginUser(user: any): Observable<any> {
+  loginUser(user: Partial<User>): Observable<any> {
     return this.http.post(`${this.domain}${this.endpoint}/login`, user);
   }
 }

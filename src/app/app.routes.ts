@@ -19,8 +19,8 @@ import {CreateEventComponent} from './organizers/pages/create-event/create-event
 export const routes: Routes = [
   { path: 'home', component: MainComponent },
   { path: 'search-event', component: SearchEventComponent },
-  { path: 'info-event', component: InfoEventComponent },
-  { path: 'choose-payment-method', component: ChoosePaymentMethodComponent },
+  { path: 'info-event/:id', component: InfoEventComponent },
+  { path: 'choose-payment-method/:id', component: ChoosePaymentMethodComponent },
   { path: 'purchase-success', component: PurchaseSuccessComponent },
   { path: 'my-tickets', component: MyTicketsComponent },
 
