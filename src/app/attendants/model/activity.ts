@@ -6,6 +6,7 @@ export interface Activity {
     location: string;
     tags: string[];
     fechas_eventos: string[]; 
+    
     tickets: Ticket[];
     businessId: string;
   }

@@ -29,15 +29,17 @@
               <select
                 id="event-date"
                 class="px-1.5 py-1 mt-1 text-xs border border-white border-solid bg-zinc-300 bg-opacity-0"
-              >
-                <option>{{event.fecha}}</option>
+                style="color: black;background-color: white;"
+               >
+                <!-- Usa *ngFor para iterar sobre cada fecha en el array fechas_eventos -->
+                <option *ngFor="let fecha of event.fechas_eventos">{{ formatFecha(fecha) }}</option>
               </select>
+              <!--
               <div class="flex justify-between text-xl">
                 <div class="mt-2 max-md:mr-0.5 ">Horario: </div>
-                <div class="mt-2 max-md:mr-0.5">{{event.hour}}</div>
-
+                <div class="mt-2 max-md:mr-0.5">{{event.fechas_eventos}}</div>
               </div>
-
+            -->
             </div>
 
             <h3 class="px-16 mt-3 whitespace-nowrap bg-customOrange text-center max-md:px-5">

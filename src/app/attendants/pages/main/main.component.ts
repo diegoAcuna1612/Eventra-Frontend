@@ -8,7 +8,7 @@ import { UsersService } from '../../../auth/services/users.service';
 import { EventCard } from '../../model/event-card';
 import { ActivitiesService } from '../../services/event-card.service';
 import { Router } from '@angular/router';
-
+import { InteractionPages } from '../../services/interaction-pages';
 
 @Component({
   selector: 'app-main',
@@ -34,7 +34,7 @@ export class MainComponent implements OnInit {
   totalPagesTendencias: number = Math.ceil(this.eventsTrending.length / this.itemsPerPage);
   totalPagesDescubre: number = Math.ceil(this.eventsDiscover.length / this.itemsPerPage);
 
-  constructor(private activitiesService: ActivitiesService,) {}
+  constructor(private activitiesService: ActivitiesService,private interactionPages:InteractionPages) {}
 
   ngOnInit() {
     this.loadActivities();
@@ -113,5 +113,9 @@ export class MainComponent implements OnInit {
       this.currentPageDestacados++;
   }
    // Método para navegar a InfoEventComponent
-
+   onEventClicked(eventId: string) {
+    console.log('onEventClicked');
+    console.log('ID del evento:', eventId);
+    this.interactionPages.setEventId(eventId); // Almacena el `eventId` en el servicio
+  }
 }
