@@ -34,7 +34,7 @@ export class MainComponent implements OnInit {
   totalPagesTendencias: number = Math.ceil(this.eventsTrending.length / this.itemsPerPage);
   totalPagesDescubre: number = Math.ceil(this.eventsDiscover.length / this.itemsPerPage);
 
-  constructor(private activitiesService: ActivitiesService,private interactionPages:InteractionPages) {}
+  constructor(private activitiesService: ActivitiesService,private interactionPages:InteractionPages, private router:Router) {}
 
   ngOnInit() {
     this.loadActivities();
@@ -117,5 +117,9 @@ export class MainComponent implements OnInit {
     console.log('onEventClicked');
     console.log('ID del evento:', eventId);
     this.interactionPages.setEventId(eventId); // Almacena el `eventId` en el servicio
+  }
+  
+  navigateToCreateEvent() {
+    this.router.navigate(['/create-event']);
   }
 }
