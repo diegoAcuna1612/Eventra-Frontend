@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../auth/model/user';
 import {Router, RouterLink} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
@@ -12,10 +12,16 @@ import {NotificationService} from '../../services/notification.service';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
-  @Input() user!: User;
+export class SidebarComponent implements OnInit{
+  user: any;
 
   constructor(private router: Router, private notificationService: NotificationService) {}
+
+  ngOnInit() {
+    this.user = {
+      photo:'path/to/default/photo.jpg'
+    }
+  }
 
   logout() {
     localStorage.clear();
@@ -26,3 +32,4 @@ export class SidebarComponent {
   }
 
 }
+

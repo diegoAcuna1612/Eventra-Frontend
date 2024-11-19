@@ -1,136 +1,81 @@
 <div class="flex overflow-hidden flex-col bg-white">
-  <main
-    class="self-center pt-5 pr-6 pb-2 mt-10 mb-10 max-w-full bg-customGray rounded-[20px] w-[889px] max-md:pr-5 max-md:mt-10">
-    <div class="flex mb-2 max-md:flex-col">
-
-      <app-sidebar  class="w-[22%] max-md:w-full"></app-sidebar>
-      <div
-        class="shrink-0 w-px border border-white border-solid self-stretch"
-      ></div>
-
-      <section class="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
-        <div class="flex flex-col w-full max-md:mt-10 max-md:max-w-full">
-          <div class="max-md:mr-2.5 max-md:max-w-full">
-            <div class="flex gap-5 max-md:flex-col">
-
-              <div class="flex flex-col w-[45%] max-md:ml-0 max-md:w-full">
-                <div class="flex flex-col grow items-start text-xl font-light text-neutral-400 max-md:mt-6">
-                  <label for="username">Usuario</label>
-                  <input id="username" type="text"
-                         class="self-stretch px-2 py-px mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5"/>
-                  <label for="fullname" class="mt-4 text-white">Nombres y Apellidos</label>
-                  <input id="fullname" type="text"
-                         class="self-stretch px-2 py-px mt-1.5 text-white whitespace-nowrap border border-white bg-zinc-300 bg-opacity-0 max-md:pr-5"/>
-                </div>
-              </div>
-
-              <div class="flex flex-col w-[55%] max-md:ml-0 max-md:w-full">
-                <div class="flex flex-col pr-9 font-light text-xl max-md:pr-5">
-                  <div class="flex justify-between whitespace-nowrap">
-                    <label for="email" class="text-xl text-neutral-400">Email</label>
-                    <div class="flex gap-1 my-auto text-xs text-green-500">
-                      <div class="grow">Verificado</div>
-                      <i class="pi pi-star-fill mt-0.5 text-green-500"></i>
-                    </div>
+  <main class="self-center pt-5 pr-6 pb-2 mt-10 mb-10 max-w-full bg-customGray rounded-[20px] w-[889px] max-md:pr-5 max-md:mt-10">
+    <form [formGroup]="updateProfileForm" (ngSubmit)="onSubmit()">
+      <div class="flex mb-2 max-md:flex-col">
+        <app-sidebar class="w-[22%] max-md:w-full"></app-sidebar>
+        <div class="shrink-0 w-px border border-white border-solid self-stretch"></div>
+        <section class="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
+          <div class="flex flex-col w-full max-md:mt-10 max-md:max-w-full">
+            <div class="max-md:mr-2.5 max-md:max-w-full">
+              <div class="flex gap-5 max-md:flex-col">
+                <div class="flex flex-col w-[45%] max-md:ml-0 max-md:w-full">
+                  <div class="flex flex-col grow items-start text-xl font-light text-neutral-400 max-md:mt-6">
+                    <label for="username">Usuario</label>
+                    <input id="username" type="text" formControlName="username" class="self-stretch px-2 py-px mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5" [disabled]="true"/>
+                    <label for="realName" class="mt-4 text-white">Nombres y Apellidos</label>
+                    <input id="realName" type="text" formControlName="realName" class="self-stretch px-2 py-px mt-1.5 text-white whitespace-nowrap border border-white bg-zinc-300 bg-opacity-0 max-md:pr-5"/>
                   </div>
-                  <input id="email" type="email"
-                         class="self-stretch text-neutral-400 px-2 mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5"/>
-                  <label for="birthdate" class="mt-4 text-white">Fecha de Nacimiento</label>
-                  <input id="birthdate" type="date"
-                         class="date-input px-2 mt-1.5 self-stretch text-white whitespace-nowrap border border-white bg-zinc-300 bg-opacity-0 max-md:pr-5"/>
+                </div>
+                <div class="flex flex-col w-[55%] max-md:ml-0 max-md:w-full">
+                  <div class="flex flex-col pr-9 font-light text-xl max-md:pr-5">
+                    <div class="flex justify-between whitespace-nowrap">
+                      <label for="email" class="text-xl text-neutral-400">Email</label>
+                      <div class="flex gap-1 my-auto text-xs text-green-500">
+                        <div class="grow">Verificado</div>
+                        <i class="pi pi-star-fill mt-0.5 text-green-500"></i>
+                      </div>
+                    </div>
+                    <input id="email" type="email" formControlName="email" class="self-stretch text-neutral-400 px-2 mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5" [disabled]="true"/>
+                    <label for="birthDate" class="mt-4 text-white">Fecha de Nacimiento</label>
+                    <input id="birthDate" type="date" formControlName="birthDate" class="date-input px-2 mt-1.5 self-stretch text-white whitespace-nowrap border border-white bg-zinc-300 bg-opacity-0 max-md:pr-5"/>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="max-md:mr-2.5 max-md:max-w-full">
-            <div class="flex gap-5 max-md:flex-col text-xl font-light text-white">
-              <div class="flex flex-col w-[30%] mt-4 max-md:w-full">
-                <label for="dni">DNI</label>
-                <input id="dni" type="text"
-                       class="flex shrink-0 px-2 mt-1.5 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px]"/>
-              </div>
-              <div class="flex flex-col w-[30%] pl-1 mt-4 max-md:w-full max-md:pl-0">
-                <label for="country">País</label>
-                <input id="country" type="text"
-                       class="flex shrink-0 px-2 mt-1.5 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px]"/>
-              </div>
-              <div class="relative flex flex-col w-[30%] pl-1 mt-4 max-md:w-full max-md:pl-0">
-                <label for="gender">Género</label>
-                <select id="gender"
-                        class="flex shrink-0 mt-1.5 border px-2 border-white border-solid bg-customGray text-white h-[30px]">
-                  <option value="male"
-                          class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">
-                    Masculino
-                  </option>
-                  <option value="female"
-                          class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">
-                    Femenino
-                  </option>
-                  <option value="other"
-                          class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">
-                    Otro
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-col mt-4 text-xl font-light text-white w-full max-md:w-full max-md:pl-0">
-            <label for="address" class="self-start">Dirección</label>
-            <input id="address" type="text"
-                   class="flex shrink-0 mt-1.5 px-2 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] w-[calc(100%-20px)] max-md:w-full"/>
-          </div>
-
-          <div class="flex flex-col mt-4 text-xl font-light text-white w-full max-md:w-full max-md:pl-0">
-            <label for="phone" class="self-start">Teléfono</label>
-            <div class="flex justify-between max-md:flex-col w-[calc(100%-20px)] max-md:w-full">
-              <div class="flex max-md:flex-col">
-                <!-- falta cambiar -->
-                <div class="flex gap-1 my-auto text-white border border-white whitespace-nowrap">
-                  <img loading="lazy"
-                       src="https://cdn.builder.io/api/v1/image/assets/TEMP/a7745f1835141bedc41120e7ea1e8406de209c85e4e69c05a11293e051676618?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81"
-                       class="object-contain shrink-0 my-auto rounded aspect-[1.47] w-[25px]" alt=""/>
-                  <span>+51</span>
+            <div class="max-md:mr-2.5 max-md:max-w-full">
+              <div class="flex gap-5 max-md:flex-col text-xl font-light text-white">
+                <div class="flex flex-col w-[30%] mt-4 max-md:w-full">
+                  <label for="dni">DNI</label>
+                  <input id="dni" type="text" formControlName="dni" class="flex shrink-0 px-2 mt-1.5 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px]"/>
                 </div>
-                <input id="phone" type="text"
-                       class="flex shrink-0 mt-1 px-2 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] w-[200px] max-md:mr-2.5"/>
+                <div class="flex flex-col w-[30%] pl-1 mt-4 max-md:w-full max-md:pl-0">
+                  <label for="country">País</label>
+                  <input id="country" type="text" formControlName="country" class="flex shrink-0 px-2 mt-1.5 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px]"/>
+                </div>
+                <div class="relative flex flex-col w-[30%] pl-1 mt-4 max-md:w-full max-md:pl-0">
+                  <label for="gender">Género</label>
+                  <select id="gender" formControlName="gender" class="flex shrink-0 mt-1.5 border px-2 border-white border-solid bg-customGray text-white h-[30px]">
+                    <option value="male" class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">Masculino</option>
+                    <option value="female" class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">Femenino</option>
+                    <option value="other" class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">Otro</option>
+                  </select>
+                </div>
               </div>
-              <button
-                class="px-4 py-1 whitespace-nowrap bg-green-500 rounded-lg shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-customGray transition-transform duration-100 active:scale-105 active:bg-green-600">
-                Verificar
-              </button>
-              <button class="my-auto text-white underline basis-auto hover:text-customOrange">Cambiar contraseña
-              </button>
+            </div>
+            <div class="flex flex-col mt-4 text-xl font-light text-white w-full max-md:w-full max-md:pl-0">
+              <label for="direction" class="self-start">Dirección</label>
+              <input id="direction" type="text" formControlName="direction" class="flex shrink-0 mt-1.5 px-2 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] w-[calc(100%-20px)] max-md:w-full"/>
+            </div>
+            <div class="flex flex-col mt-4 text-xl font-light text-white w-full max-md:w-full max-md:pl-0">
+              <label for="phone" class="self-start">Teléfono</label>
+              <div class="flex justify-between max-md:flex-col w-[calc(100%-20px)] max-md:w-full">
+                <div class="flex max-md:flex-col">
+                  <div class="flex gap-1 my-auto text-white border border-white whitespace-nowrap">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a7745f1835141bedc41120e7ea1e8406de209c85e4e69c05a11293e051676618?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81" class="object-contain shrink-0 my-auto rounded aspect-[1.47] w-[25px]" alt=""/>
+                    <span>+51</span>
+                  </div>
+                  <input id="phone" type="text" formControlName="phone" class="flex shrink-0 mt-1 px-2 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] w-[200px] max-md:mr-2.5"/>
+                </div>
+                <button class="px-4 py-1 whitespace-nowrap bg-green-500 rounded-lg shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-customGray transition-transform duration-100 active:scale-105 active:bg-green-600">Verificar</button>
+                <button class="my-auto text-white underline basis-auto hover:text-customOrange">Cambiar contraseña</button>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!--
-          <div class="flex flex-col w-full mt-3">
-            <label for="phone" class="self-start text-xl font-light text-white">Teléfono</label>
-            <div class="flex items-center mt-1.5">
-              <select [(ngModel)]="user.countryCode" (change)="onCountryChange($event.target.value)" class="flex shrink-0 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] text-white">
-                <option *ngFor="let country of countries" [value]="country.dialling_code">
-                  <span class="inline-block w-4 h-4 mr-2" [style.backgroundImage]="'url(' + country.flag + ')'"></span>
-                  {{ country.dialling_code }}
-                </option>
-              </select>
-              <input id="phone" type="text" [(ngModel)]="user.phone" class="flex shrink-0 ml-2 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] w-[639px] max-md:mr-2.5 text-white" />
-            </div>
+          <div class="flex justify-end pr-4 max-md:justify-center">
+            <button type="submit" class="px-5 py-1 mt-8 text-xl font-light text-white whitespace-nowrap bg-orange-500 rounded-lg shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:pr-5">Guardar</button>
           </div>
-          -->
-
-        <div class="flex justify-end pr-4 max-md:justify-center"
-        >
-          <button
-            class="px-5 py-1 mt-8  text-xl font-light text-white whitespace-nowrap bg-orange-500 rounded-lg shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:pr-5">
-            Guardar
-          </button>
-        </div>
-
-
-      </section>
-    </div>
+        </section>
+      </div>
+    </form>
   </main>
 </div>
