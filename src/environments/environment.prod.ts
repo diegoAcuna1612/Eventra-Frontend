@@ -1,4 +1,6 @@
 export const environment={
     production:true,
-    domain: 'http://eventra-services.jackby03.com:8080/',
+    domain: 'http://gustavo-tenant-eventrabackend-viae0c-b1b3fd-35-239-187-59.traefik.me/api/',
+    nft: 'http://localhost:5000/api/',
+
 }

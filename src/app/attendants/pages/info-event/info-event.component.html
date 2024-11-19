@@ -46,82 +46,48 @@
               Entradas
             </h3>
             <form>
-              <div class="flex gap-2 px-2 justify-between self-center mt-1.5 w-full items-center">
-
+              <div *ngFor="let ticket of tickets" class="flex gap-2 px-2 justify-between self-center mt-1.5 w-full items-center">
                 <div class="flex flex-col mt-0.5 w-full">
-                  <label class="self-start " for="vip-tickets">VIP Golden Access</label>
-                  <label class="text-6">Precio: S/ 450.00</label>
+                  <label class="self-start" [for]="'ticket-' + ticket.idTicket">{{ ticket.name }}</label>
+                  <label class="text-6">Precio: S/ {{ ticket.price }}.00</label>
                 </div>
-
-                <div class="flex gap-0.5 self-start mt-3.5 whitespace-nowrap bg-customOrange">
-                  <button type="button" aria-label="Decrease VIP tickets" (click)="decreaseTickets('vip')" class="w-5 h-5 flex items-center justify-center">-</button>
-                  <input
-                    type="number"
-                    id="vip-tickets"
-                    class="z-10 px-1 text-xs text-black bg-white w-8 h-5"
-                    [value]="vipTickets"
-                    min="0"
-                    readonly
-                  />
-                  <button type="button" aria-label="Increase VIP tickets" (click)="increaseTickets('vip')" class="w-5 h-5 flex items-center justify-center">+</button>
-                </div>
-              </div>
-
-              <hr class="shrink-0 mt-3 h-px border border-white border-solid" />
-
-              <div class="flex px-2 gap-10 self-center mt-1.5 w-full whitespace-nowrap">
-
-                <div class="flex flex-col mt-0.5 w-full">
-                  <label class="self-start " for="platea-tickets">Platea</label>
-                  <label class="text-6">Precio: S/ 250.00</label>
-                </div>
-
+            
                 <div class="flex gap-0.5 self-start mt-3.5 bg-customOrange">
-                  <button type="button" aria-label="Decrease Platea tickets" (click)="decreaseTickets('platea')" class="w-5 h-5 flex items-center justify-center">-</button>
+                  <button
+                    type="button"
+                    [attr.aria-label]="'Decrease' + ticket.name+  'tickets'"
+                    (click)="decreaseTickets(ticket.idTicket)"
+                    class="w-5 h-5 flex items-center justify-center"
+                  >-</button>
                   <input
                     type="number"
-                    id="platea-tickets"
+                    [id]="'ticket-' + ticket.idTicket"
                     class="z-10 px-1 text-xs text-black bg-white w-8 h-5"
-                    [value]="plateaTickets"
+                    [value]="quantities[ticket.idTicket]"
                     min="0"
                     readonly
                   />
-                  <button type="button" aria-label="Increase Platea tickets" (click)="increaseTickets('platea')" class="w-5 h-5 flex items-center justify-center">+</button>
+                  <button
+                    type="button"
+                    [attr.aria-label]="'Increase' + ticket.name+  'tickets'"
+                    (click)="increaseTickets(ticket.idTicket)"
+                    class="w-5 h-5 flex items-center justify-center"
+                  >+</button>
                 </div>
               </div>
-
+            
               <hr class="shrink-0 mt-3 h-px border border-white border-solid" />
-
-              <div class="flex px-2 gap-10 self-center mt-1.5 w-full whitespace-nowrap">
-                <div class="flex flex-col mt-0.5 w-full">
-                  <label class="self-start " for="general-tickets">General</label>
-                  <label class="text-6">Precio: S/ 125.00</label>
-                </div>
-
-                <div class="flex gap-0.5 my-auto mt-3.5 bg-customOrange">
-                  <button type="button" aria-label="Decrease General tickets" (click)="decreaseTickets('general')" class="w-5 h-5 flex items-center justify-center">-</button>
-                  <input
-                    type="number"
-                    id="general-tickets"
-                    class="z-10 px-1 text-xs text-black bg-white w-8 h-5"
-                    [value]="generalTickets"
-                    min="0"
-                    readonly
-                  />
-                  <button type="button" aria-label="Increase General tickets" (click)="increaseTickets('general')" class="w-5 h-5 flex items-center justify-center">+</button>
-                </div>
-              </div>
-
-              <hr class="shrink-0 mt-3 h-px border border-white border-solid" />
-
+            
               <div class="flex px-2 justify-between self-center mt-1.5 w-full whitespace-nowrap">
-
                 <label class="text-6">Total: </label>
                 <label class="text-6">S/ {{ total }}.00</label>
-
               </div>
-
+            
+              <div class="flex justify-end mt-4">
+                <button type="button" class="btn btn-primary" (click)="buyTickets()">Comprar Entradas</button>
+              </div>
             </form>
+            
           </div>
 
           <button

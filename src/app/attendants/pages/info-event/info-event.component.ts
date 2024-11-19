@@ -4,6 +4,7 @@ import {Activity} from '../../model/activity';
 import { ActivatedRoute, Router } from '@angular/router';
 import {EventService} from '../../services/event.service';
 import { CommonModule } from '@angular/common';
+import { TicketService } from '../../services/ticket.service';
 @Component({
   selector: 'app-info-event',
   standalone: true,
@@ -17,16 +18,22 @@ import { CommonModule } from '@angular/common';
 })
 export class InfoEventComponent {
   event!: Activity;
+  
   vipTickets: number = 0;
   plateaTickets: number = 0;
   generalTickets: number = 0;
+ 
+ 
+  tickets: any[] = [];
+  quantities: { [key: number]: number } = {};
   total: number = 0;
   eventId: string = ''; // Almacena el `eventId` aquí
 
 
   constructor(   private route: ActivatedRoute, 
     private router: Router,
-    private eventService: EventService 
+    private eventService: EventService,
+    private ticketService: TicketService 
   ) {
   }
   ngOnInit() {
@@ -36,8 +43,21 @@ export class InfoEventComponent {
         this.eventId = eventId; // Asigna `eventId` a la propiedad del componente
         console.log("SI LLEGO EL VALOR DEL ID al info:", eventId);
         this.loadEventDetails(eventId); 
+        this.loadTickets(eventId); // Llama al método para cargar los tickets
+
       }
     });
+  }
+  loadTickets(eventId: string) {
+    this.ticketService.getTicketsEventsById(eventId).subscribe(
+      (ticketData) => {
+        this.tickets = ticketData; // Almacena los tickets en la propiedad `tickets`
+        this.initializeQuantities(); // Inicializa las cantidades a 0
+      },
+      (error) => {
+        console.error('Error al cargar los tickets:', error);
+      }
+    );
   }
   loadEventDetails(eventId: string) {
     /*
@@ -71,6 +91,14 @@ export class InfoEventComponent {
     this.eventService.getActivityById(eventId).subscribe(
       (activityData) => {
         this.event = activityData;
+
+            // Almacena el nombre del evento en localStorage
+        if (this.event?.name) {
+          localStorage.setItem('eventName', this.event.name);
+          localStorage.setItem('photo', this.event.photo);
+
+          console.log('Nombre del evento almacenado en localStorage:', this.event.name);
+        }
       },
       (error) => {
         console.error('Error al cargar los datos del evento:', error);
@@ -90,7 +118,13 @@ export class InfoEventComponent {
     return `${dayName}: ${day}/${month}/${year} ${hours}:${minutes}`;
   }
 
-  increaseTickets(type: string) {
+  initializeQuantities() {
+    this.tickets.forEach(ticket => {
+      this.quantities[ticket.idTicket] = 0;
+    });
+  }
+  increaseTickets(idTicket: number) {
+    /*
     if (type === 'vip') {
       this.vipTickets++;
     } else if (type === 'platea') {
@@ -98,10 +132,18 @@ export class InfoEventComponent {
     } else if (type === 'general') {
       this.generalTickets++;
     }
-    this.updateTotal();
+    this.updateTotal();*/
+    if (this.quantities[idTicket] !== undefined) {
+      this.quantities[idTicket]++;
+      this.updateTotal();
+    }
   }
 
-  decreaseTickets(type: string) {
+  decreaseTickets(
+    //type: string
+    idTicket: number
+  ) {
+    /*
     if (type === 'vip' && this.vipTickets > 0) {
       this.vipTickets--;
     } else if (type === 'platea' && this.plateaTickets > 0) {
@@ -109,14 +151,24 @@ export class InfoEventComponent {
     } else if (type === 'general' && this.generalTickets > 0) {
       this.generalTickets--;
     }
-    this.updateTotal();
+    this.updateTotal();*/
+
+    if (this.quantities[idTicket] > 0) {
+      this.quantities[idTicket]--;
+      this.updateTotal();
+    }
   }
 
   updateTotal() {
-    this.total = (this.vipTickets * 450) + (this.plateaTickets * 250) + (this.generalTickets * 125);
+    //this.total = (this.vipTickets * 450) + (this.plateaTickets * 250) + (this.generalTickets * 125);
+    this.total = this.tickets.reduce(
+      (sum, ticket) => sum + ticket.price * (this.quantities[ticket.idTicket] || 0),
+      0
+    );
   }
 
   buyTickets() {
+    /*
     const tickets = [
       { type: 'VIP Golden Access', quantity: this.vipTickets, price: 450 },
       { type: 'Platea', quantity: this.plateaTickets, price: 250 },
@@ -125,8 +177,17 @@ export class InfoEventComponent {
   
     // Navega a `choose-payment-method/{eventId}` pasando `tickets` y `total` en el estado
     this.router.navigate([`/choose-payment-method`, this.eventId], { state: { tickets, total: this.total } })
-      .then(r => console.log("Navegación exitosa:", r));
-  }
+      .then(r => console.log("Navegación exitosa:", r));*/
+
+    const selectedTickets = this.tickets.map(ticket => ({
+      type: ticket.name,
+      quantity: this.quantities[ticket.idTicket] || 0,
+      price: ticket.price,
+    }));
+
+    this.router.navigate([`/choose-payment-method`, this.eventId], { state: { tickets: selectedTickets, total: this.total } })
+      .then(r => console.log('Navegación exitosa:', r));
+}
 
 
 }

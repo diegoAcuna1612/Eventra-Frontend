@@ -4,7 +4,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {CardTicketComponent} from '../../components/card-ticket/card-ticket.component';
 import {Ticket} from '../../model/ticket';
 import {TicketService} from '../../services/ticket.service';
-
+import {NftService} from '../../services/nft.service';
 @Component({
   selector: 'app-choose-payment-method',
   standalone: true,
@@ -27,7 +27,9 @@ export class ChoosePaymentMethodComponent{
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private ticketService: TicketService) {
+    private ticketService: TicketService,
+    private nftService: NftService
+) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras?.state) {
       this.tickets = navigation.extras.state['tickets'].filter((ticket: Ticket) => ticket.quantity > 0);
@@ -67,6 +69,13 @@ export class ChoosePaymentMethodComponent{
     this.ticketService.buyTicket(ticketData).subscribe(
       (response) => {
         console.log('Compra realizada con éxito:', response);
+        
+        // Recupera el nombre del evento y la URL de la imagen desde el localStorage
+        const creator = localStorage.getItem('eventName') || 'Evento sin nombre';
+        const metadata = localStorage.getItem('photo') || 'https://example.com/default-image.jpg'; // URL por defecto si no hay imagen
+    
+        // Llama al NftService con los valores obtenidos
+        this.sendToNftService(creator, metadata);
         this.router.navigate(['/purchase-success']);
       },
       (error) => {
@@ -74,9 +83,35 @@ export class ChoosePaymentMethodComponent{
         this.errorMessage = 'Error en la compra. Inténtalo de nuevo.';
       }
     );
+    
 
   }
   
+  sendToNftService(eventName: string, metadata: string): void {
+    const nftData = {
+      name: eventName,
+      creator: crypto.randomUUID(), // Genera un UUID para el creador
+      metadata: metadata,// URL por defecto si no hay imagen
+    };
+  
+    // Agrega un console.log para verificar qué datos se están enviando
+    console.log('Datos enviados al NftService:', nftData);
+  
+    this.nftService.createNft(nftData).subscribe(
+      (response) => {
+        console.log('NFT creado exitosamente:', response);
+        // Puedes redirigir a una página de éxito si es necesario
+        // this.router.navigate(['/nft-success']);
+      },
+      (error) => {
+        console.error('Error al crear el NFT:', error);
+        this.errorMessage = 'Error al crear el NFT. Inténtalo de nuevo.';
+      }
+    );
 
+    //this.nftService.createNft();
+  }
+  
+  
 
 }
