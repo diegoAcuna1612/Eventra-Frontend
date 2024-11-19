@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-statistics',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.css'
 })

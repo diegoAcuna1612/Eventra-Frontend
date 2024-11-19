@@ -1,4 +1,4 @@
 export const environment={
     production:false,
-    domain: 'http://localhost:8080/api/',  
+    domain: 'http://gustavo-tenant-eventrabackend-viae0c-b1b3fd-35-239-187-59.traefik.me/api/',
 }

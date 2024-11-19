@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../model/user';
 @Injectable({
@@ -9,10 +9,27 @@ import { User } from '../model/user';
 export class UsersService {
   private endpoint='users'
   private domain: string|undefined;
-  constructor(private http: HttpClient) { 
+
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
+  constructor(private http: HttpClient) {
       this.domain = environment.domain;
   }
-  
+
+  private hasToken(): boolean {
+    return !!localStorage.getItem('userId');
+  }
+
+  loginn(){
+    this.isAuthenticatedSubject.next(true);
+  }
+
+  logout(){
+    localStorage.removeItem('userId');
+    this.isAuthenticatedSubject.next(false);
+  }
+
   getUsers(): Observable<any> {
     return this.http.get(`${this.domain}${this.endpoint}`);
   }
