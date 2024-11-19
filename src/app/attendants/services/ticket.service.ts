@@ -35,4 +35,8 @@ export class TicketService {
     return this.http.get(`${this.domain}${this.endpoint}/${ticketId}`);
   }
 
+  getTicketsEventsById(ticketId: string): Observable<any> {
+    return this.http.get(`${this.domain}${this.endpoint}/event/${ticketId}`);
+  }
+
 }

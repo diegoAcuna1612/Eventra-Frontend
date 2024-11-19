@@ -32,6 +32,7 @@ export class LoginComponent {
       next: (response) => {
         localStorage.setItem('userId', response.id);
         this.usersService.loginn();
+
         this.router.navigate(['/home']);
       },
       error: (error) => {
