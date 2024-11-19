@@ -1,0 +1,121 @@
+<main class="flex overflow-hidden flex-col px-3 pb-20 bg-customGray">
+  <section class="self-end mt-10 mb-10 w-full max-w-[1195px] max-md:max-w-full">
+    <div class="flex gap-5 max-md:flex-col">
+      <article class="flex flex-col w-[38%] max-md:ml-0 max-md:w-full">
+        <div class="flex flex-col text-4xl text-white max-md:mt-10 max-md:max-w-full">
+          <img [src]="event?.imageUrl" alt="{{ event?.name }} Cover" class="object-contain rounded-2xl aspect-[1.22] max-md:max-w-full" />
+          <h2 class="self-center mt-3.5">{{ event?.name }}</h2>
+        </div>
+      </article>
+
+      <article class="flex flex-col ml-5 w-[62%] max-md:ml-0 max-md:w-full">
+        <div class="flex flex-col mt-3.5 w-full max-md:mt-10 max-md:max-w-full">
+          <h1 class="mt-2 ml-5 text-4xl text-white font-[250]">Estadísticas</h1>
+          <div class="w-full max-md:max-w-full">
+            <div class="flex gap-5 max-md:flex-col">
+              <section class="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
+                <div class="flex grow gap-5 justify-between items-start px-8 pt-2 pb-6 w-full text-white rounded-lg border border-white border-solid bg-blend-darken bg-neutral-800 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-2">
+                  <div class="flex flex-col self-start whitespace-nowrap">
+                    <h3 class="self-start text-base">Asistentes</h3>
+                    <div class="flex flex-col pl-2 mt-4 text-2xl text-center">
+                      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/07bba7935946f53ca049c51af329d58436e926625682682b2a42a7c6db865851?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81" alt="Attendees Icon" class="object-contain self-center w-16 aspect-square" />
+                      <p>{{ event?.attendees }}</p>
+                    </div>
+                  </div>
+                  <dl class="flex flex-col items-start self-end mt-10 text-base">
+                    <div class="flex gap-1.5 self-stretch">
+                      <dt>Tasa de compra:</dt>
+                      <dd>{{ event?.purchaseRate }}</dd>
+                    </div>
+                    <div class="flex gap-2 mt-2 whitespace-nowrap">
+                      <dt>Hombres:</dt>
+                      <dd>{{ event?.male }}</dd>
+                    </div>
+                    <div class="flex gap-1.5 mt-1.5 whitespace-nowrap">
+                      <dt>Mujeres:</dt>
+                      <dd>{{ event?.female }}</dd>
+                    </div>
+                    <div class="flex gap-1 mt-1.5">
+                      <dt>Edad promedio:</dt>
+                      <dd>{{ event?.averageAge }}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </section>
+
+              <section class="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
+                <div class="flex grow gap-5 justify-between items-start px-6 pt-2 pb-8 w-full text-white rounded-lg border border-white border-solid bg-blend-darken bg-neutral-800 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-2">
+                  <div class="flex flex-col self-start">
+                    <h3 class="self-start text-base">Redes Sociales (Likes)</h3>
+                    <div class="flex gap-10 mt-3 text-2xl text-center whitespace-nowrap">
+                      <div class="flex flex-col flex-1">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/df35c222280a30ea4f32340692c136fe6b5ffff13e2098a489ea2610cd54088d?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81" alt="Facebook Icon" class="object-contain aspect-square w-[57px]" />
+                        <p class="mt-3">{{ event?.socialLikes.facebook }}</p>
+                      </div>
+                      <div class="flex flex-col flex-1">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d35e1c3217a6c090900d362c16b61f210f0565ecb92c87c53a71a1c471ad8ee7?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81" alt="Twitter Icon" class="object-contain rounded-none aspect-[0.97] w-[55px]" />
+                        <p class="self-start mt-3">{{ event?.socialLikes.twitter }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col self-end mt-9 text-2xl text-center whitespace-nowrap">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2061b8337a92c4fb8912d17a5a236e80fcee9eb6ef265efdf1a0739a3b9cd20f?placeholderIfAbsent=true&apiKey=493704e98b76408d8785bb427786fc81" alt="Instagram Icon" class="object-contain aspect-square w-[57px]" />
+                    <p class="mt-2.5">{{ event?.socialLikes.instagram }}</p>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <button class="self-start px-3 pt-2.5 pb-4 mt-7 text-base font-light leading-tight text-center text-white bg-amber-500 rounded-xl">
+            Comparar con otro evento
+          </button>
+
+          <section class="mt-5">
+            <div class="flex z-10 flex-wrap gap-10 py-2 pr-2.5 pl-5 w-full text-base text-white rounded-lg border border-solid bg-zinc-800 border-zinc-800 max-md:max-w-full">
+              <h3 class="grow">Evento</h3>
+              <div class="flex flex-auto gap-4">
+                <p>Asistent.</p>
+                <p>Tasa de compra</p>
+                <p>Hombres/Mujeres</p>
+                <p>Edad Prom.</p>
+                <p>Interacciones</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-5 justify-between items-start pt-6 pr-16 pb-12 pl-2 mt-0 text-base text-white rounded-lg border border-solid bg-neutral-800 border-zinc-800 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:pr-5 max-md:max-w-full" *ngFor="let comparison of event?.comparison">
+              <div class="flex flex-col self-stretch">
+                <div class="flex gap-5">
+                  <p>{{ comparison.name }}</p>
+                  <p>{{ comparison.attendees }}</p>
+                  <p>{{ comparison.purchaseRate }}</p>
+                </div>
+                <div class="flex gap-5 justify-between mt-9 w-full whitespace-nowrap">
+                  <p>{{ comparison.name }}</p>
+                  <div class="flex gap-10 self-start">
+                    <p>{{ comparison.attendees }}</p>
+                    <p>{{ comparison.purchaseRate }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col whitespace-nowrap">
+                <p>{{ comparison.male }}/{{ comparison.female }}</p>
+                <p class="mt-9">{{ comparison.male }}/{{ comparison.female }}</p>
+              </div>
+              <div class="flex flex-col whitespace-nowrap">
+                <div class="flex gap-5 justify-between">
+                  <p>{{ comparison.averageAge }}</p>
+                  <p>{{ comparison.interactions }}</p>
+                </div>
+                <div class="flex gap-5 justify-between mt-9 max-md:mr-1.5">
+                  <p>{{ comparison.averageAge }}</p>
+                  <p>{{ comparison.interactions }}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
