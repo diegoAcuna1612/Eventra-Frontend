@@ -1,4 +1,4 @@
 export const environment={
     production:true,
-    domain: 'http://eventra-services.jackby03.com:8080/',
+    domain: 'http://localhost:8080/api/',
 }
