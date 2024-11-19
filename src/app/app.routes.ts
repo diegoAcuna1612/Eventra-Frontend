@@ -15,6 +15,7 @@ import {VerifyEmailComponent} from './auth/pages/verify-email/verify-email.compo
 import { ReviewEventRequestsComponent } from './organizers/components/review-event-requests/review-event-requests.component';
 import { EventStatisticsComponent } from './organizers/components/event-statistics/event-statistics.component';
 import {CreateEventComponent} from './organizers/pages/create-event/create-event.component';
+import {StatisticsComponent} from './organizers/pages/statistics/statistics.component';
 
 export const routes: Routes = [
   { path: 'home', component: MainComponent },
@@ -36,7 +37,7 @@ export const routes: Routes = [
 
   //{path:'customize-event', component: CustomizeeEventComponent},
   {path:'review-event-requests', component: ReviewEventRequestsComponent},
-  {path:'event-statistics', component: EventStatisticsComponent},
+  {path:'event-statistics', component: StatisticsComponent},
 
   { path: '**', redirectTo: 'login' },
 

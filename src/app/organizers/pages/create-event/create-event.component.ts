@@ -123,7 +123,7 @@ export class CreateEventComponent implements OnInit {
       });
     }
   }
-  
+
   // Método para convertir el archivo a base64
   convertFileToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -133,12 +133,12 @@ export class CreateEventComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
-  
+
   // Método para subir la imagen a imgBB
   uploadImageToImgBB(base64Image: string): Promise<string> {
     const formData = new FormData();
     formData.append('image', base64Image);
-  
+
     return this.http.post(`https://api.imgbb.com/1/upload?key=${this.apiKey}`, formData)
       .toPromise()
       .then((response: any) => response.data.url as string) // Devuelve la URL de la imagen subida
@@ -147,9 +147,9 @@ export class CreateEventComponent implements OnInit {
         throw error;
       });
   }
-  
-  
-onSubmit(): void {
+
+
+  onSubmit(): void {
   if (this.eventForm.invalid) {
     this.notificationService.showNotification('Por favor, completa todos los campos requeridos.');
     return;
@@ -170,7 +170,7 @@ onSubmit(): void {
 
   // Subir la imagen a imgBB antes de enviar los datos al backend
   const base64Photo = (this.eventForm.value.photo as string).replace(/^data:image\/[a-z]+;base64,/, '');
-  this.uploadImageToImgBB(base64Photo).then((imgBBUrl: string) => {  
+  this.uploadImageToImgBB(base64Photo).then((imgBBUrl: string) => {
     const formValue = {
       ...this.eventForm.value,
       photo: imgBBUrl, // Usa la URL de imgBB en lugar de base64
@@ -185,6 +185,8 @@ onSubmit(): void {
       next: (response) => {
         console.log('Evento creado con éxito:', response);
         this.notificationService.showNotification('Evento guardado y publicado con éxito.');
+
+
       },
       error: (error) => {
         console.error('Error al crear el evento:', error);
@@ -195,10 +197,10 @@ onSubmit(): void {
     console.error('Error al subir la imagen a imgBB:', error);
     this.notificationService.showNotification('Hubo un error al subir la imagen. Inténtalo nuevamente.');
   });
-}
+  }
 
 
-  
-  
-  
+
+
+
 }

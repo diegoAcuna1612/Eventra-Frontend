@@ -1,6 +1,7 @@
-<div *ngIf="!isAuthenticated; else loggedInHeader">
+<div *ngIf="!(isAuthenticated$ | async); else loggedInHeader">
   <app-navbar-auth></app-navbar-auth>
 </div>
+
 
 <ng-template #loggedInHeader>
   <app-navbar></app-navbar>
@@ -20,5 +21,3 @@
 
 </div>
 
-<button (click)="login()">Login</button>
-<button (click)="logout()">Logout</button>

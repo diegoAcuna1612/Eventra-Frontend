@@ -1,0 +1,96 @@
+<div class="flex overflow-hidden flex-col bg-white">
+  <main
+    class="self-center pt-5 pr-6 pb-2 mt-10 mb-10 max-w-full bg-customGray rounded-[20px] w-[889px] max-md:pr-5 max-md:mt-10">
+    <div class="flex mb-2 max-md:flex-col">
+
+      <app-sidebar  class="w-[22%] max-md:w-full"></app-sidebar>
+      <div
+        class="shrink-0 w-px border border-white border-solid self-stretch"
+      ></div>
+
+      <article class="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
+        <div class="flex flex-col mt-3.5 w-full max-md:mt-10 max-md:max-w-full">
+          <h1 class="mb-10 text-4xl text-white font-[250]">Estadísticas</h1>
+
+          <div class="w-full max-md:max-w-full">
+            <div class="flex  max-md:flex-col">
+
+              <section class="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
+                <div class="flex grow gap-5 justify-between items-start px-5 pt-2 pb-6 w-full text-white rounded-xl border-none bg-black shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-2">
+                  <div class="flex flex-col self-start whitespace-nowrap">
+                    <h3 class="self-start text-base">Asistentes</h3>
+                    <div class="flex flex-col pl-2 mt-4 text-2xl text-center">
+                      <i class="pi pi-users self-center text-6xl"></i>
+                      <p>{{ statistics?.actual }} / {{ statistics?.aforum }}</p>
+                    </div>
+                  </div>
+                  <dl class="flex flex-col items-start self-end mt-10 text-base">
+                    <div class="flex gap-1.5 self-stretch">
+                      <dt>Tasa de compra:</dt>
+                      <dd>{{ calculatePurchaseRate(statistics?.actual, statistics?.aforum) }}</dd>
+                    </div>
+                    <div class="flex gap-2 mt-2 whitespace-nowrap">
+                      <dt>Hombres:</dt>
+                      <dd>{{ statistics?.male }}</dd>
+                    </div>
+                    <div class="flex gap-1.5 mt-1.5 whitespace-nowrap">
+                      <dt>Mujeres:</dt>
+                      <dd>{{ statistics?.female }}</dd>
+                    </div>
+                    <div class="flex gap-1 mt-1.5">
+                      <dt>Edad promedio:</dt>
+                      <dd>{{ statistics?.averageAge }}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </section>
+
+              <section class="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full justify-center items-center">
+                <div class="flex grow gap-5 justify-between items-start px-5 pt-2 w-full text-white rounded-xl border-none bg-black shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-2">
+                  <div class="flex flex-col items-center w-full">
+                    <h3 class="self-start text-base">Redes Sociales (Likes)</h3>
+                    <div class="flex gap-10 mt-7 text-2xl text-center items-center w-full">
+                      <div class="flex flex-col flex-1 items-center">
+                        <i class="pi pi-facebook text-6xl"></i>
+                        <p class="self-center mt-3">{{ socialLikes.facebook }}</p>
+                      </div>
+                      <div class="flex flex-col flex-1 items-center">
+                        <i class="pi pi-twitter text-6xl"></i>
+                        <p class="self-center mt-3">{{ socialLikes.twitter }}</p>
+                      </div>
+                      <div class="flex flex-col flex-1 items-center">
+                        <i class="pi pi-instagram text-6xl"></i>
+                        <p class="self-center mt-3">{{ socialLikes.instagram }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+
+
+<!--
+<main class="flex flex-col items-center pb-20 bg-customGray">
+  <section class="mt-10 mb-10 w-full max-w-[1195px] max-md:max-w-full">
+    <div class="flex gap-5 max-md:flex-col">
+
+      <aside class="flex flex-col w-[38%] max-md:ml-0 max-md:w-full justify-center">
+        <div class="flex flex-col text-4xl text-white max-md:mt-10 max-md:max-w-full">
+          <img [src]="event?.imageUrl" alt="{{ event?.name }} Cover" class="object-cover w-full rounded-2xl aspect-[4/3] max-md:max-w-full" />
+          <h2 class="self-center mt-3.5 font-light">{{ event?.name }}</h2>
+        </div>
+      </aside>
+
+
+    </div>
+  </section>
+</main>
+-->
