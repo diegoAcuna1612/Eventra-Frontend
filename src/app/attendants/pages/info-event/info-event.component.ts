@@ -91,6 +91,14 @@ export class InfoEventComponent {
     this.eventService.getActivityById(eventId).subscribe(
       (activityData) => {
         this.event = activityData;
+
+            // Almacena el nombre del evento en localStorage
+        if (this.event?.name) {
+          localStorage.setItem('eventName', this.event.name);
+          localStorage.setItem('photo', this.event.photo);
+
+          console.log('Nombre del evento almacenado en localStorage:', this.event.name);
+        }
       },
       (error) => {
         console.error('Error al cargar los datos del evento:', error);
