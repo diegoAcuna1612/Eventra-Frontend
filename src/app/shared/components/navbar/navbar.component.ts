@@ -45,5 +45,7 @@ export class NavbarComponent {
     }, 2000);
   }
 
-
+  navigateToCreateEvent() {
+    this.router.navigate(['/create-event']);
+  }
 }

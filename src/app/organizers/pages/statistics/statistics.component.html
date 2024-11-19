@@ -1,3 +1,83 @@
+<div class="flex overflow-hidden flex-col bg-white">
+  <main
+    class="self-center pt-5 pr-6 pb-2 mt-10 mb-10 max-w-full bg-customGray rounded-[20px] w-[889px] max-md:pr-5 max-md:mt-10">
+    <div class="flex mb-2 max-md:flex-col">
+
+      <app-sidebar  class="w-[22%] max-md:w-full"></app-sidebar>
+      <div
+        class="shrink-0 w-px border border-white border-solid self-stretch"
+      ></div>
+
+      <article class="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
+        <div class="flex flex-col mt-3.5 w-full max-md:mt-10 max-md:max-w-full">
+          <h1 class="mb-10 text-4xl text-white font-[250]">Estadísticas</h1>
+
+          <div class="w-full max-md:max-w-full">
+            <div class="flex  max-md:flex-col">
+
+              <section class="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
+                <div class="flex grow gap-5 justify-between items-start px-5 pt-2 pb-6 w-full text-white rounded-xl border-none bg-black shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-2">
+                  <div class="flex flex-col self-start whitespace-nowrap">
+                    <h3 class="self-start text-base">Asistentes</h3>
+                    <div class="flex flex-col pl-2 mt-4 text-2xl text-center">
+                      <i class="pi pi-users self-center text-6xl"></i>
+                      <p>{{ statistics?.actual }} / {{ statistics?.aforum }}</p>
+                    </div>
+                  </div>
+                  <dl class="flex flex-col items-start self-end mt-10 text-base">
+                    <div class="flex gap-1.5 self-stretch">
+                      <dt>Tasa de compra:</dt>
+                      <dd>{{ calculatePurchaseRate(statistics?.actual, statistics?.aforum) }}</dd>
+                    </div>
+                    <div class="flex gap-2 mt-2 whitespace-nowrap">
+                      <dt>Hombres:</dt>
+                      <dd>{{ statistics?.male }}</dd>
+                    </div>
+                    <div class="flex gap-1.5 mt-1.5 whitespace-nowrap">
+                      <dt>Mujeres:</dt>
+                      <dd>{{ statistics?.female }}</dd>
+                    </div>
+                    <div class="flex gap-1 mt-1.5">
+                      <dt>Edad promedio:</dt>
+                      <dd>{{ statistics?.averageAge }}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </section>
+
+              <section class="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full justify-center items-center">
+                <div class="flex grow gap-5 justify-between items-start px-5 pt-2 w-full text-white rounded-xl border-none bg-black shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-2">
+                  <div class="flex flex-col items-center w-full">
+                    <h3 class="self-start text-base">Redes Sociales (Likes)</h3>
+                    <div class="flex gap-10 mt-7 text-2xl text-center items-center w-full">
+                      <div class="flex flex-col flex-1 items-center">
+                        <i class="pi pi-facebook text-6xl"></i>
+                        <p class="self-center mt-3">{{ socialLikes.facebook }}</p>
+                      </div>
+                      <div class="flex flex-col flex-1 items-center">
+                        <i class="pi pi-twitter text-6xl"></i>
+                        <p class="self-center mt-3">{{ socialLikes.twitter }}</p>
+                      </div>
+                      <div class="flex flex-col flex-1 items-center">
+                        <i class="pi pi-instagram text-6xl"></i>
+                        <p class="self-center mt-3">{{ socialLikes.instagram }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+
+
+<!--
 <main class="flex flex-col items-center pb-20 bg-customGray">
   <section class="mt-10 mb-10 w-full max-w-[1195px] max-md:max-w-full">
     <div class="flex gap-5 max-md:flex-col">
@@ -9,103 +89,8 @@
         </div>
       </aside>
 
-      <article class="flex flex-col ml-5 w-[62%] max-md:ml-0 max-md:w-full">
-        <div class="flex flex-col mt-3.5 w-full max-md:mt-10 max-md:max-w-full">
-          <h1 class="mb-10 text-4xl text-white font-[250]">Estadísticas</h1>
 
-          <div class="w-full max-md:max-w-full">
-            <div class="flex gap-5 max-md:flex-col">
-
-              <section class="flex flex-col w-7/12 max-md:ml-0 max-md:w-full">
-                <div class="flex grow gap-5 justify-between items-start px-5 pt-2 pb-6 w-full text-white rounded-xl border-none bg-black shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-2">
-                  <div class="flex flex-col self-start whitespace-nowrap">
-                    <h3 class="self-start text-base">Asistentes</h3>
-                    <div class="flex flex-col pl-2 mt-4 text-2xl text-center">
-                      <i class="pi pi-users self-center text-6xl"></i>
-                      <p>{{ event?.attendees }}</p>
-                    </div>
-                  </div>
-                  <dl class="flex flex-col items-start self-end mt-10 text-base">
-                    <div class="flex gap-1.5 self-stretch">
-                      <dt>Tasa de compra:</dt>
-                      <dd>{{ event?.purchaseRate }}</dd>
-                    </div>
-                    <div class="flex gap-2 mt-2 whitespace-nowrap">
-                      <dt>Hombres:</dt>
-                      <dd>{{ event?.male }}</dd>
-                    </div>
-                    <div class="flex gap-1.5 mt-1.5 whitespace-nowrap">
-                      <dt>Mujeres:</dt>
-                      <dd>{{ event?.female }}</dd>
-                    </div>
-                    <div class="flex gap-1 mt-1.5">
-                      <dt>Edad promedio:</dt>
-                      <dd>{{ event?.averageAge }}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </section>
-
-              <section class="flex flex-col ml-5 w-5/12 max-md:ml-0 max-md:w-full justify-center items-center">
-                <div class="flex grow gap-5 justify-between items-start px-5 pt-2 w-full text-white rounded-xl border-none bg-black shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 max-md:mt-2">
-                  <div class="flex flex-col items-center">
-                    <h3 class="self-start text-base">Redes Sociales (Likes)</h3>
-                    <div class="flex gap-10 mt-7 text-2xl text-center items-center">
-                      <div class="flex flex-col flex-1 items-center">
-                        <i class="pi pi-facebook text-6xl"></i>
-                        <p class="self-center mt-3">{{ event?.socialLikes.facebook }}</p>
-                      </div>
-                      <div class="flex flex-col flex-1 items-center">
-                        <i class="pi pi-twitter text-6xl"></i>
-                        <p class="self-center mt-3">{{ event?.socialLikes.twitter }}</p>
-                      </div>
-                      <div class="flex flex-col flex-1 items-center">
-                        <i class="pi pi-instagram text-6xl"></i>
-                        <p class="self-center mt-3">{{ event?.socialLikes.instagram }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-            </div>
-          </div>
-
-          <button class="self-start px-3 pt-2.5 pb-4 mt-7 text-base font-light leading-tight text-center text-white bg-amber-500 rounded-xl  transition-transform duration-100 active:scale-105 active:bg-customOrange2">
-            Comparar con otro evento
-          </button>
-
-          <section class="mt-5">
-            <div class="flex z-10 flex-wrap gap-10 py-2 pr-2.5 pl-5 w-full text-base text-white rounded-lg border-none  border-zinc-800 max-md:max-w-full">
-              <h3 class="grow">Comparar Eventos</h3>
-            </div>
-
-            <table class="w-full text-base text-white rounded-lg border-none bg-black border-zinc-800 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:max-w-full">
-              <thead>
-              <tr>
-                <th class="py-2 px-4">Evento</th>
-                <th class="py-2 px-4">Asistent.</th>
-                <th class="py-2 px-4">Tasa de compra</th>
-                <th class="py-2 px-4">Hombres/Mujeres</th>
-                <th class="py-2 px-4">Edad Prom.</th>
-                <th class="py-2 px-4">Interacciones</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let comparison of event?.comparison">
-                <td class="py-2 px-4">{{ comparison.name}}</td>
-                <td class="py-2 px-4">{{ comparison.attendees }}</td>
-                <td class="py-2 px-4">{{ comparison.purchaseRate }}</td>
-                <td class="py-2 px-4">{{ comparison.male }}/{{ comparison.female }}</td>
-                <td class="py-2 px-4">{{ comparison.averageAge }}</td>
-                <td class="py-2 px-4">{{ comparison.interactions }}</td>
-              </tr>
-              </tbody>
-            </table>
-          </section>
-
-        </div>
-      </article>
     </div>
   </section>
 </main>
+-->
