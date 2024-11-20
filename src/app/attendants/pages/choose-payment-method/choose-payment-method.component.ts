@@ -97,6 +97,7 @@ export class ChoosePaymentMethodComponent{
     // Agrega un console.log para verificar qué datos se están enviando
     console.log('Datos enviados al NftService:', nftData);
   
+    /*
     this.nftService.createNft(nftData).subscribe(
       (response) => {
         console.log('NFT creado exitosamente:', response);
@@ -107,9 +108,9 @@ export class ChoosePaymentMethodComponent{
         console.error('Error al crear el NFT:', error);
         this.errorMessage = 'Error al crear el NFT. Inténtalo de nuevo.';
       }
-    );
+    );*/
 
-    //this.nftService.createNft();
+    this.nftService.createNft();
   }
   
   

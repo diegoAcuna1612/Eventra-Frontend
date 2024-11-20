@@ -96,6 +96,7 @@ export class InfoEventComponent {
         if (this.event?.name) {
           localStorage.setItem('eventName', this.event.name);
           localStorage.setItem('photo', this.event.photo);
+          localStorage.setItem('description', this.event.description);
 
           console.log('Nombre del evento almacenado en localStorage:', this.event.name);
         }

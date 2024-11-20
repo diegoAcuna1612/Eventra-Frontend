@@ -15,18 +15,22 @@ export class NftService {
   }
 
   
-  createNft(data: { name: string; creator: string; metadata: string }): Observable<any> {
+  /*createNft(data: { name: string; creator: string; metadata: string }): Observable<any> {
     return this.http.post(`${this.domain}${this.endpoint}/create`, {});
   }
-
-    /*
+*/
+    
 createNft() {
     const url = 'http://localhost:5000/api/nft/create';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = {
-        name: 'AnimeMechassssFest 2024',
-        creator: 'creator_id',
-        metadata: 'https://i.ibb.co/vqNv2RD/3e59ffd90bb8.jpg'
+        name: localStorage.getItem('eventName') || 'Evento sin nombre',
+        creator:  crypto.randomUUID(),
+        metadata:{
+            image: localStorage.getItem('photo'),
+            description:localStorage.getItem('description'),
+        },
+
     };
 
     this.http.post(url, body, { headers }).subscribe(
@@ -38,7 +42,7 @@ createNft() {
         }
     );
     }
-*/
+
   sendCurlRequest(data: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
