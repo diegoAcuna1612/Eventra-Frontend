@@ -85,7 +85,7 @@ export class RegisterComponent {
       this.usersService.createUser(userData).subscribe({
         next: (response) => {
           console.log('User registered successfully:', response);
-          this.router.navigate(['/verify-email']);
+          this.router.navigate(['/login']);
         },
         error: (error) => {
           console.error('Registration error:', error.message);

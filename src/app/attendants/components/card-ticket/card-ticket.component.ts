@@ -14,5 +14,8 @@ import {NgClass, NgForOf} from '@angular/common';
 })
 export class CardTicketComponent {
   @Input() ticket!: Ticket;
-
+  
+  get imageUrl(): string | null {
+    return localStorage.getItem('photo');
+  }
 }

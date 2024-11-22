@@ -1,17 +1,18 @@
 <div class="flex overflow-hidden flex-col bg-white">
   <main class="self-center pt-5 pr-6 pb-2 mt-10 mb-10 max-w-full bg-customGray rounded-[20px] w-[889px] max-md:pr-5 max-md:mt-10">
-    <form [formGroup]="updateProfileForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="updateProfileForm" (ngSubmit)="onSubmit()" >
       <div class="flex mb-2 max-md:flex-col">
         <app-sidebar class="w-[22%] max-md:w-full"></app-sidebar>
         <div class="shrink-0 w-px border border-white border-solid self-stretch"></div>
-        <section class="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
+        <section *ngIf="usernameRole === 'CLIENT'" class="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
           <div class="flex flex-col w-full max-md:mt-10 max-md:max-w-full">
             <div class="max-md:mr-2.5 max-md:max-w-full">
               <div class="flex gap-5 max-md:flex-col">
                 <div class="flex flex-col w-[45%] max-md:ml-0 max-md:w-full">
                   <div class="flex flex-col grow items-start text-xl font-light text-neutral-400 max-md:mt-6">
                     <label for="username">Usuario</label>
-                    <input id="username" type="text" formControlName="username" class="self-stretch px-2 py-px mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5" [disabled]="true"/>
+                    <input  [placeholder]="usernamePlaceholder" 
+                    id="username" type="text" formControlName="username"  class="self-stretch px-2 py-px mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5" readonly/>
                     <label for="realName" class="mt-4 text-white">Nombres y Apellidos</label>
                     <input id="realName" type="text" formControlName="realName" class="self-stretch px-2 py-px mt-1.5 text-white whitespace-nowrap border border-white bg-zinc-300 bg-opacity-0 max-md:pr-5"/>
                   </div>
@@ -25,8 +26,9 @@
                         <i class="pi pi-star-fill mt-0.5 text-green-500"></i>
                       </div>
                     </div>
-                    <input id="email" type="email" formControlName="email" class="self-stretch text-neutral-400 px-2 mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5" [disabled]="true"/>
-                    <label for="birthDate" class="mt-4 text-white">Fecha de Nacimiento</label>
+                    <input [placeholder]="emailPlaceholder"  id="email" type="email" formControlName="email" class="self-stretch text-neutral-400 px-2 mt-1.5 whitespace-nowrap border border-solid bg-zinc-300 bg-opacity-0 border-neutral-400 max-md:pr-5" readonly/>
+
+                    <label  for="birthDate" class="mt-4 text-white">Fecha de Nacimiento</label>
                     <input id="birthDate" type="date" formControlName="birthDate" class="date-input px-2 mt-1.5 self-stretch text-white whitespace-nowrap border border-white bg-zinc-300 bg-opacity-0 max-md:pr-5"/>
                   </div>
                 </div>
@@ -45,16 +47,16 @@
                 <div class="relative flex flex-col w-[30%] pl-1 mt-4 max-md:w-full max-md:pl-0">
                   <label for="gender">Género</label>
                   <select id="gender" formControlName="gender" class="flex shrink-0 mt-1.5 border px-2 border-white border-solid bg-customGray text-white h-[30px]">
-                    <option value="male" class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">Masculino</option>
-                    <option value="female" class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">Femenino</option>
-                    <option value="other" class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">Otro</option>
+                    <option value="Masculino" class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">Masculino</option>
+                    <option value="Femenino" class="bg-customGray font-light text-white hover:bg-white hover:text-black border-b border-white">Femenino</option>
                   </select>
-                </div>
+        </div>
               </div>
             </div>
             <div class="flex flex-col mt-4 text-xl font-light text-white w-full max-md:w-full max-md:pl-0">
               <label for="direction" class="self-start">Dirección</label>
-              <input id="direction" type="text" formControlName="direction" class="flex shrink-0 mt-1.5 px-2 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] w-[calc(100%-20px)] max-md:w-full"/>
+              <input [placeholder]="directionPlaceholder" id="direction" type="text" formControlName="direction" class="flex shrink-0 mt-1.5 px-2 border border-white border-solid bg-zinc-300 bg-opacity-0 h-[30px] w-[calc(100%-20px)] max-md:w-full"/>
+
             </div>
             <div class="flex flex-col mt-4 text-xl font-light text-white w-full max-md:w-full max-md:pl-0">
               <label for="phone" class="self-start">Teléfono</label>
@@ -72,8 +74,11 @@
             </div>
           </div>
           <div class="flex justify-end pr-4 max-md:justify-center">
-            <button type="submit" class="px-5 py-1 mt-8 text-xl font-light text-white whitespace-nowrap bg-orange-500 rounded-lg shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:pr-5">Guardar</button>
+            <button type="submit"  class="px-5 py-1 mt-8 text-xl font-light text-white whitespace-nowrap bg-orange-500 rounded-lg shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:pr-5">Guardar</button>
           </div>
+        </section>
+        <section *ngIf="usernameRole === 'BUSINESS'" class="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
+            sadasd
         </section>
       </div>
     </form>
