@@ -40,7 +40,9 @@ export class InfoEventComponent {
     this.route.paramMap.subscribe(params => {
       const eventId = params.get('id');
       if (eventId) {
-        this.eventId = eventId; // Asigna `eventId` a la propiedad del componente
+        this.eventId = eventId;
+        localStorage.setItem('eventId', eventId);
+        // Asigna `eventId` a la propiedad del componente
         console.log("SI LLEGO EL VALOR DEL ID al info:", eventId);
         this.loadEventDetails(eventId); 
         this.loadTickets(eventId); // Llama al método para cargar los tickets

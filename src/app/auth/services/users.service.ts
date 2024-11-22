@@ -3,11 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../model/user';
+import {Client} from '../model/client';
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
   private endpoint='users'
+  private endpointBusiness='businesses'
+  private endpointClient='clients'
   private domain: string|undefined;
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
@@ -44,4 +47,17 @@ export class UsersService {
   loginUser(user: Partial<User>): Observable<any> {
     return this.http.post(`${this.domain}${this.endpoint}/login`, user);
   }
+  getApiURLBusiness(): string {
+    return this.domain + this.endpointBusiness;
+  }
+  getApiUrlClient(): string {
+    return this.domain + this.endpointClient;
+  }
+
+  updateClient(client: any): Observable<any> {
+    return this.http.put(`${this.domain}${this.endpointClient}`, client);
+  }
+  
+
+
 }

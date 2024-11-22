@@ -1,31 +1,35 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../model/user';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {NgForOf} from '@angular/common';
+import {NgForOf,NgIf} from '@angular/common';
 import {SidebarComponent} from '../../../shared/components/sidebar/sidebar.component';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
-
+import { UsersService } from '../../services/users.service';
 @Component({
   selector: 'app-update-profile',
   standalone: true,
   imports: [
     FormsModule,
-    NgForOf,
     SidebarComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './update-profile.component.html',
   styleUrl: './update-profile.component.css'
 })
 export class UpdateProfileComponent implements OnInit {
   updateProfileForm: FormGroup;
-
+  usernamePlaceholder: string = 'Username';
+  directionPlaceholder: string = 'Direction';
+  emailPlaceholder: string = 'Email';
+  usernameRole: string | null = null;
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private usersService: UsersService
   ) {
     this.updateProfileForm = this.fb.group({
       realName: ['', Validators.required],
@@ -40,11 +44,19 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usernameRole = localStorage.getItem('role'); // O la lógica para obtener el rol
     this.loadClientData();
+
   }
 
+
   loadClientData(): void {
-    const clientId = localStorage.getItem('userId')
+    this.usernamePlaceholder = localStorage.getItem('name') ?? 'Default Username';
+    this.directionPlaceholder = localStorage.getItem('direccion')?? 'Default Direction';
+    this.emailPlaceholder = localStorage.getItem('email')?? 'Default Email';
+    const clientId = localStorage.getItem('userId');
+    
+
     this.http.get(`${environment.domain}clients/${clientId}`).subscribe((data: any) => {
       this.updateProfileForm.patchValue({
         username: data.username,
@@ -63,15 +75,34 @@ export class UpdateProfileComponent implements OnInit {
 
   onSubmit(): void {
     if (this.updateProfileForm.valid) {
-      this.http.put(`${environment.domain}clients`, this.updateProfileForm.value).subscribe(
-        response => {
-          console.log('Profile updated successfully', response);
-          this.router.navigate(['/main']);
+      // Construir el objeto en el formato requerido por el backend
+      const clientData = {
+        realName: this.updateProfileForm.get('realName')?.value,
+        birthDate: this.updateProfileForm.get('birthDate')?.value,
+        dni: this.updateProfileForm.get('dni')?.value,
+        country: this.updateProfileForm.get('country')?.value,
+        gender: this.updateProfileForm.get('gender')?.value,
+        direction: this.updateProfileForm.get('direction')?.value,
+        phone: this.updateProfileForm.get('phone')?.value,
+        clientId: localStorage.getItem('userId'),
+      };
+  
+      console.log('Request body to be sent:', clientData);
+
+      // Usar el servicio para actualizar el cliente
+      
+      this.usersService.updateClient(clientData).subscribe({
+        next: (response) => {
+          console.log('Profile updated successfully:', response);
         },
-        error => {
-          console.error('Error updating profile', error);
-        }
-      );
+        error: (error) => {
+          console.error('Error updating profile:', error);
+          alert('Error al actualizar el perfil. Por favor, intenta nuevamente.');
+        },
+      });
+    } else {
+      alert('Por favor, completa todos los campos obligatorios.');
     }
   }
+  
 }
